@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Execute Pipeline1",
+				"name": "EXEC_RAW_DATA",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
@@ -18,6 +18,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL2_RAW_DATA",
+						"type": "PipelineReference"
+					},
 					"waitOnCompletion": true
 				}
 			},
