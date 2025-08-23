@@ -28,7 +28,7 @@
 				}
 			},
 			{
-				"name": "Switch1",
+				"name": "Switch_CSV_EXCEL_FILES",
 				"type": "Switch",
 				"dependsOn": [
 					{
@@ -46,10 +46,46 @@
 					},
 					"cases": [
 						{
-							"value": "csv"
+							"value": "csv",
+							"activities": [
+								{
+									"name": "EXEC_PL4_1_CSV",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL4_1_CSV",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true
+									}
+								}
+							]
 						},
 						{
-							"value": "excel"
+							"value": "excel",
+							"activities": [
+								{
+									"name": "EXEC_PL4_2_EXCEL",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL4_2_EXCEL",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true
+									}
+								}
+							]
 						}
 					]
 				}
