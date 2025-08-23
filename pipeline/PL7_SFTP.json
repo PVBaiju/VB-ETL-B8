@@ -206,7 +206,17 @@
 				"outputs": [
 					{
 						"referenceName": "DS_SINK_SFTP_DYNA",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": {
+								"value": "@variables('latestfile')",
+								"type": "Expression"
+							},
+							"directory": {
+								"value": "@concat(formatDateTime(utcnow(),'yyyy'),'/',formatDateTime(utcnow(),'MM'),'/',formatDateTime(utcnow(),'dd'),'/')",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
