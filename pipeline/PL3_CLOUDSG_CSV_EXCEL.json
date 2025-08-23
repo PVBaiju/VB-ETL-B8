@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "LKUP_CSV_EXCEL",
+				"name": "LKUP_SRC_FILES",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -28,11 +28,11 @@
 				}
 			},
 			{
-				"name": "Switch_CSV_EXCEL",
+				"name": "Switch_SRC_LOC_CSV_EXCEL",
 				"type": "Switch",
 				"dependsOn": [
 					{
-						"activity": "LKUP_CSV_EXCEL",
+						"activity": "LKUP_SRC_FILES",
 						"dependencyConditions": [
 							"Succeeded"
 						]
