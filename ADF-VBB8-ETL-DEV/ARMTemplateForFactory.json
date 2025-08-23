@@ -162,7 +162,7 @@
 							},
 							"cases": [
 								{
-									"value": "cloud",
+									"value": "CloudStorage",
 									"activities": [
 										{
 											"name": "EXEC_PL3_DATA",
