@@ -615,7 +615,12 @@
 													"type": "PipelineReference"
 												},
 												"waitOnCompletion": true,
-												"parameters": {}
+												"parameters": {
+													"Trigger": {
+														"value": "@pipeline().parameters.Trigger",
+														"type": "Expression"
+													}
+												}
 											}
 										}
 									]
@@ -719,7 +724,7 @@
 									"value": "azure",
 									"activities": [
 										{
-											"name": "Exec_file_CSV_EXCEL",
+											"name": "Exec_file_CSV",
 											"type": "ExecutePipeline",
 											"dependsOn": [],
 											"policy": {
