@@ -61,7 +61,7 @@
 									"userProperties": [],
 									"typeProperties": {
 										"pipeline": {
-											"referenceName": "PL3_CLOUD_CSV_EXCEL",
+											"referenceName": "PL3_CLOUDSG_CSV_EXCEL",
 											"type": "PipelineReference"
 										},
 										"waitOnCompletion": true,
