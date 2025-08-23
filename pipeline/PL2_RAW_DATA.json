@@ -162,7 +162,7 @@
 							"value": "bulk",
 							"activities": [
 								{
-									"name": "Execute Pipeline1",
+									"name": "Exec_BULK_DIFF_FOLDER",
 									"type": "ExecutePipeline",
 									"dependsOn": [],
 									"policy": {
