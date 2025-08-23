@@ -162,12 +162,19 @@
 							"value": "bulk",
 							"activities": [
 								{
-									"name": "Wait8",
-									"type": "Wait",
+									"name": "Execute Pipeline1",
+									"type": "ExecutePipeline",
 									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
 									"userProperties": [],
 									"typeProperties": {
-										"waitTimeInSeconds": 1
+										"pipeline": {
+											"referenceName": "PL10_BULK_FOLDERS",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true
 									}
 								}
 							]

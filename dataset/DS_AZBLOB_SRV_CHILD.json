@@ -1,0 +1,22 @@
+{
+	"name": "DS_AZBLOB_SRV_CHILD",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZBLOB_CHID_SRV",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "rawdata"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
