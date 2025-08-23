@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "DS_AZBLOB_SRV_CHILD",
+						"referenceName": "DS_AZBLOB_BULK_CHILD",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
@@ -65,7 +65,17 @@
 						]
 					}
 				],
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Get_CHILD_META').output.childItems",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@endswith(item().name,'.json' )",
+						"type": "Expression"
+					}
+				}
 			},
 			{
 				"name": "CSV_Iteration",
@@ -136,7 +146,7 @@
 									"referenceName": "DS_AZBLOB_SRV_CHILD",
 									"type": "DatasetReference",
 									"parameters": {
-										"sourcecsv": {
+										"sourcefile": {
 											"value": "@item().name",
 											"type": "Expression"
 										}

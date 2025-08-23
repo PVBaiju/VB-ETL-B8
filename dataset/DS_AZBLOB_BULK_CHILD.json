@@ -1,25 +1,15 @@
 {
-	"name": "DS_AZBLOB_SRV_CHILD",
+	"name": "DS_AZBLOB_BULK_CHILD",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_AZBLOB_CHILD",
+			"referenceName": "LS_AZBLOB_BULK_SRV",
 			"type": "LinkedServiceReference"
-		},
-		"parameters": {
-			"sourcefile": {
-				"type": "string"
-			}
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation",
-				"fileName": {
-					"value": "@dataset().sourcefile",
-					"type": "Expression"
-				},
-				"container": "rawdata"
+				"type": "AzureBlobStorageLocation"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
