@@ -17,7 +17,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT DISTINCT L4_switch_type FROM dbo.vb_tbl_job a\r\nJOIN dbo.vb_tbl_trigger b ON a.trigger_id = b.trigger_id\r\nWHERE b.trigger_name = '@{pipeline().parameters.Trigger}'",
+						"sqlReaderQuery": {
+							"value": "SELECT DISTINCT L4_switch_type FROM dbo.vb_tbl_job a\r\nJOIN dbo.vb_tbl_trigger b ON a.trigger_id = b.trigger_id\r\nWHERE b.trigger_name = '@{pipeline().parameters.Trigger}'",
+							"type": "Expression"
+						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -61,7 +64,13 @@
 											"referenceName": "PL4_1_CSV",
 											"type": "PipelineReference"
 										},
-										"waitOnCompletion": true
+										"waitOnCompletion": true,
+										"parameters": {
+											"Trigger": {
+												"value": "@pipeline().parameters.Trigger",
+												"type": "Expression"
+											}
+										}
 									}
 								}
 							]
