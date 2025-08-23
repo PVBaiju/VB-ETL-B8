@@ -1,6 +1,11 @@
 {
 	"name": "LS_AZBLOB_SINK_PRQT",
 	"properties": {
+		"parameters": {
+			"adls_storage_acc_loc": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "AzureBlobFS",
 		"typeProperties": {
