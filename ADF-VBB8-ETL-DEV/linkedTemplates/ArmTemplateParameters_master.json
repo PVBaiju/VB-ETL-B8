@@ -8,6 +8,12 @@
 		"LS_AZSQLDB_METADATA_password": {
 			"value": ""
 		},
+		"LS_AZBLOB_SINK_PRQT_properties_typeProperties_url": {
+			"value": "@{linkedService().adls_storage_acc_loc}"
+		},
+		"LS_AZBLOB_SRV_CSV_properties_typeProperties_serviceEndpoint": {
+			"value": "@{linkedService().storage_acc_loc}"
+		},
 		"LS_AZSQLDB_METADATA_properties_typeProperties_server": {
 			"value": "sql-srvr-vb-dev.database.windows.net"
 		},

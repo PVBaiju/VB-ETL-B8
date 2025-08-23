@@ -11,6 +11,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_AZSQLDB_METADATA'"
 		},
+		"LS_AZBLOB_SINK_PRQT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().adls_storage_acc_loc}"
+		},
+		"LS_AZBLOB_SRV_CSV_properties_typeProperties_serviceEndpoint": {
+			"type": "string",
+			"defaultValue": "@{linkedService().storage_acc_loc}"
+		},
 		"LS_AZSQLDB_METADATA_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "sql-srvr-vb-dev.database.windows.net"
@@ -52,6 +60,12 @@
 					},
 					"LS_AZSQLDB_METADATA_password": {
 						"value": "[parameters('LS_AZSQLDB_METADATA_password')]"
+					},
+					"LS_AZBLOB_SINK_PRQT_properties_typeProperties_url": {
+						"value": "[parameters('LS_AZBLOB_SINK_PRQT_properties_typeProperties_url')]"
+					},
+					"LS_AZBLOB_SRV_CSV_properties_typeProperties_serviceEndpoint": {
+						"value": "[parameters('LS_AZBLOB_SRV_CSV_properties_typeProperties_serviceEndpoint')]"
 					},
 					"LS_AZSQLDB_METADATA_properties_typeProperties_server": {
 						"value": "[parameters('LS_AZSQLDB_METADATA_properties_typeProperties_server')]"
