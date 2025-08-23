@@ -101,7 +101,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@greater(activity('GET_CHILD_METADATA').output.lastModified,variables('Refdatetime'))\r\n\r\n",
+									"value": "@greater(activity('Getlastmod').output.lastModified,variables('Refdatetime'))\n\n",
 									"type": "Expression"
 								},
 								"ifTrueActivities": [
@@ -116,7 +116,10 @@
 										"userProperties": [],
 										"typeProperties": {
 											"variableName": "Refdatetime",
-											"value": ""
+											"value": {
+												"value": "@activity('Getlastmod').output.lastModified",
+												"type": "Expression"
+											}
 										}
 									},
 									{
@@ -134,7 +137,14 @@
 											"secureOutput": false,
 											"secureInput": false
 										},
-										"userProperties": []
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "latestfile",
+											"value": {
+												"value": "@activity('Getlastmod').output.itemName",
+												"type": "Expression"
+											}
+										}
 									}
 								]
 							}
