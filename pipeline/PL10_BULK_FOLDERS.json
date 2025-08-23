@@ -146,7 +146,13 @@
 							"outputs": [
 								{
 									"referenceName": "DS_AZBLOB_SINK_CSV",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"sinkcsv": {
+											"value": "@concat(replace(item().name,'.csv',''),'_',formatDateTime(utcNow(),'yyyy-MM-dd HH:mm:ss'),'.csv')",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
