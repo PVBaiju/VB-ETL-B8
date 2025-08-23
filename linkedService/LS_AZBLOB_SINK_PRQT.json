@@ -1,12 +1,6 @@
 {
 	"name": "LS_AZBLOB_SINK_PRQT",
 	"properties": {
-		"parameters": {
-			"adls_storage_acc_loc": {
-				"type": "string",
-				"defaultValue": "https://adlsvbsinkdev.blob.core.windows.net/"
-			}
-		},
 		"annotations": [],
 		"type": "AzureBlobFS",
 		"typeProperties": {
