@@ -1,12 +1,12 @@
 {
-	"name": "DS_AZBLOB_SRV_CHILD",
+	"name": "DS_AZBLOB_SINK_CSV",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_AZBLOB_CHID_SRV",
+			"referenceName": "LS_AZBLOB_CHID_SINK",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"sourcecsv": {
+			"sinkcsv": {
 				"type": "string"
 			}
 		},
@@ -16,10 +16,10 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": {
-					"value": "@dataset().sourcecsv",
+					"value": "@dataset().sinkcsv",
 					"type": "Expression"
 				},
-				"container": "rawdata"
+				"container": "csv"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
