@@ -3,7 +3,8 @@
 	"properties": {
 		"parameters": {
 			"adls_storage_acc_loc": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "https://adlsvbsinkdev.blob.core.windows.net/"
 			}
 		},
 		"annotations": [],
