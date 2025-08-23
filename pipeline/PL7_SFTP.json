@@ -24,6 +24,7 @@
 					],
 					"storeSettings": {
 						"type": "SftpReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false,
 						"disableChunking": false
 					},
@@ -79,6 +80,7 @@
 								],
 								"storeSettings": {
 									"type": "SftpReadSettings",
+									"recursive": true,
 									"enablePartitionDiscovery": false,
 									"disableChunking": false
 								},
@@ -221,6 +223,11 @@
 				]
 			}
 		],
+		"parameters": {
+			"Trigger": {
+				"type": "string"
+			}
+		},
 		"variables": {
 			"latestfile": {
 				"type": "String"
