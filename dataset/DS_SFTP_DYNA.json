@@ -1,0 +1,25 @@
+{
+	"name": "DS_SFTP_DYNA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SFTP_SINK",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				}
+			}
+		}
+	}
+}
