@@ -1,0 +1,16 @@
+{
+	"name": "DS_GET_SFTP_VALUES",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SFTP_SINK",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation"
+			}
+		}
+	}
+}

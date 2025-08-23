@@ -18,7 +18,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "SELECT DISTINCT L4_switch_type FROM dbo.vb_tbl_job a\r\nJOIN dbo.vb_tbl_trigger b ON a.trigger_id = b.trigger_id\r\nWHERE b.trigger_name = '@{pipeline().parameters.Trigger}'",
+							"value": "SELECT DISTINCT L4_switch_type \nFROM dbo.vb_tbl_job a\nJOIN dbo.vb_tbl_trigger b ON a.trigger_id = b.trigger_id\nWHERE b.trigger_name = '@{pipeline().parameters.Trigger}'\n\n\n",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -27,7 +27,8 @@
 					"dataset": {
 						"referenceName": "DS_AZSQLDB_METADATA",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": true
 				}
 			},
 			{

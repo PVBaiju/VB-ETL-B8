@@ -1,0 +1,47 @@
+{
+	"name": "PL7_SFTP",
+	"properties": {
+		"activities": [
+			{
+				"name": "GET_CHILD_METADATA",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DS_GET_SFTP_VALUES",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "SftpReadSettings",
+						"enablePartitionDiscovery": false,
+						"disableChunking": false
+					},
+					"formatSettings": {
+						"type": "BinaryReadSettings"
+					}
+				}
+			}
+		],
+		"variables": {
+			"latestfile": {
+				"type": "String"
+			},
+			"Refdatetime": {
+				"type": "String",
+				"defaultValue": "1800-01-01 00:00:00"
+			}
+		},
+		"annotations": []
+	}
+}
