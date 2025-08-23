@@ -150,7 +150,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"blob_storage_acc_loc": {
-								"value": "@activity('LKUP_JOB_DETAILS').output.firstRow.rawdata",
+								"value": "@activity('LKUP_JOB_DETAILS').output.firstRow.sourcedata",
 								"type": "Expression"
 							},
 							"column_delimiter": {
@@ -167,7 +167,17 @@
 				"outputs": [
 					{
 						"referenceName": "DS_AZBLOB_SINK_PRQT",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"adls_storage_acc_loc": {
+								"value": "@activity('LKUP_JOB_DETAILS').output.firstRow.targetdata",
+								"type": "Expression"
+							},
+							"directory": {
+								"value": "@activity('LKUP_JOB_DETAILS').output.firstRow.targetdirectory",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
