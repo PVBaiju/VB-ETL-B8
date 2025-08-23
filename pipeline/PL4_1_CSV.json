@@ -130,7 +130,21 @@
 				"inputs": [
 					{
 						"referenceName": "DS_AZBLOB_SRV_CSV",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"blob_storage_acc_loc": {
+								"value": "@activity('LKUP_JOB_DETAILS').output.firstRow.rawdata",
+								"type": "Expression"
+							},
+							"column_delimiter": {
+								"value": "@activity('LKUP_JOB_DETAILS').output.firstRow.delimter",
+								"type": "Expression"
+							},
+							"file": {
+								"value": "@activity('LKUP_JOB_DETAILS').output.firstRow.sourcefile",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
