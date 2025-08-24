@@ -1,0 +1,20 @@
+{
+	"name": "DS_AZSQLSRV_MIGRATION_PRQUT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_RAW_PARQUT",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "orderpayment",
+				"fileSystem": "orderpayments"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}

@@ -93,7 +93,7 @@
 							"value": "sql",
 							"activities": [
 								{
-									"name": "Execute Pipeline1",
+									"name": "EXE_SQL MIGRATION",
 									"type": "ExecutePipeline",
 									"dependsOn": [],
 									"policy": {
@@ -105,7 +105,13 @@
 											"referenceName": "PL6_SQL_MIgration",
 											"type": "PipelineReference"
 										},
-										"waitOnCompletion": true
+										"waitOnCompletion": true,
+										"parameters": {
+											"Trigger": {
+												"value": "@pipeline().parameters.Trigger",
+												"type": "Expression"
+											}
+										}
 									}
 								}
 							]
