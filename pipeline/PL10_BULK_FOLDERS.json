@@ -24,6 +24,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -241,7 +242,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"sinkfile": {
-											"value": "@concat(replace(item().name,'.json',''),'_',formatDateTime(utcNow(),'yyyy-MM-dd HH:mm:ss'),'.json')",
+											"value": "@concat(replace(item().name,'.json',''),'_',formatDateTime(utcNow(),'yyyy-MM-dd HH:mm:ss'),'.json')\n\n",
 											"type": "Expression"
 										}
 									}
