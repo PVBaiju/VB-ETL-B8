@@ -1499,7 +1499,8 @@
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
-						"type": "AzureBlobStorageLocation"
+						"type": "AzureBlobStorageLocation",
+						"container": "rawdata"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
