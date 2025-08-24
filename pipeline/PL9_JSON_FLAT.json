@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "DS_AZBLOB_JSON_FLAT_SRC",
+						"referenceName": "DS_AZADLS_JASON_FLAT_META",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
