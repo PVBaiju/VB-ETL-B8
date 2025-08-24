@@ -5,12 +5,20 @@
 			"referenceName": "LS_AZADLS_JSON_SRC",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"srcfile": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "jsontest.json",
+				"fileName": {
+					"value": "@dataset().srcfile",
+					"type": "Expression"
+				},
 				"fileSystem": "json"
 			}
 		},
