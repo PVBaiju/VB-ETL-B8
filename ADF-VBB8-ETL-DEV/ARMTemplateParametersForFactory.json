@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "ADF-VBB8-ETL-DEV"
 		},
+		"LS_AZADLS_JSON_SRC_accountKey": {
+			"value": ""
+		},
 		"LS_AZADLS_SFTP_SINK_accountKey": {
 			"value": ""
 		},
@@ -26,20 +29,23 @@
 		"LS_AZBLOB_CHILD_connectionString": {
 			"value": ""
 		},
+		"LS_AZBLOB_JSON_FLAT_SINK_accountKey": {
+			"value": ""
+		},
 		"LS_AZSQLDB_METADATA_password": {
 			"value": ""
 		},
 		"LS_SFTP_SINK_password": {
 			"value": ""
 		},
-		"LS_AZADLS_JSON_SRC_accountKey": {
-			"value": ""
-		},
-		"LS_AZBLOB_JSON_FLAT_SINK_accountKey": {
-			"value": ""
+		"LS_AZADLS_JSON_SRC_properties_typeProperties_url": {
+			"value": "https://adlsvbsrvraw.dfs.core.windows.net/"
 		},
 		"LS_AZADLS_SFTP_SINK_properties_typeProperties_url": {
 			"value": "https://adlssftpsinkdev.dfs.core.windows.net"
+		},
+		"LS_AZBLOB_JSON_FLAT_SINK_properties_typeProperties_url": {
+			"value": "https://adlsvbsinkdev.dfs.core.windows.net/"
 		},
 		"LS_AZBLOB_SINK_PRQT_properties_typeProperties_url": {
 			"value": "@{linkedService().adls_storage_acc_loc}"
@@ -61,12 +67,6 @@
 		},
 		"LS_SFTP_SINK_properties_typeProperties_userName": {
 			"value": "adlssftpsinkdev.sftpsink"
-		},
-		"LS_AZADLS_JSON_SRC_properties_typeProperties_url": {
-			"value": "https://adlsvbsrvraw.dfs.core.windows.net/"
-		},
-		"LS_AZBLOB_JSON_FLAT_SINK_properties_typeProperties_url": {
-			"value": "https://adlsvbsinkdev.dfs.core.windows.net/"
 		}
 	}
 }
