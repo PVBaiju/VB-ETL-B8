@@ -1,6 +1,41 @@
 {
 	"name": "PL9_JSON_FLAT",
 	"properties": {
+		"activities": [
+			{
+				"name": "COPY JSON FLAT CSV",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_AZADLS_JSON_FLAT_SINK",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
 		"parameters": {
 			"Trigger": {
 				"type": "string"
