@@ -1,0 +1,11 @@
+{
+	"name": "PL9_JSON_FLAT",
+	"properties": {
+		"parameters": {
+			"Trigger": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}
