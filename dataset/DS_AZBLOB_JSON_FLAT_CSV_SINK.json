@@ -19,7 +19,7 @@
 					"value": "@dataset().sinkfile",
 					"type": "Expression"
 				},
-				"fileSystem": "Flat"
+				"fileSystem": "flatcsv"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
