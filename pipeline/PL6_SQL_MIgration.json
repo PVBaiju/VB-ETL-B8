@@ -1,6 +1,11 @@
 {
 	"name": "PL6_SQL_MIgration",
 	"properties": {
+		"parameters": {
+			"Trigger": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
