@@ -11,6 +11,30 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_SFTP_SINK'"
 		},
+		"LS_AZBLOB_BULK_SRV_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_AZBLOB_BULK_SRV'"
+		},
+		"LS_AZBLOB_CHID_JSONSINK_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_AZBLOB_CHID_JSONSINK'"
+		},
+		"LS_AZBLOB_CHID_JSONSRV_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_AZBLOB_CHID_JSONSRV'"
+		},
+		"LS_AZBLOB_CHID_SINK_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_AZBLOB_CHID_SINK'"
+		},
+		"LS_AZBLOB_CHID_SRV_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_AZBLOB_CHID_SRV'"
+		},
+		"LS_AZBLOB_CHILD_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_AZBLOB_CHILD'"
+		},
 		"LS_AZSQLDB_METADATA_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_AZSQLDB_METADATA'"
@@ -81,6 +105,24 @@
 					"LS_AZADLS_SFTP_SINK_accountKey": {
 						"value": "[parameters('LS_AZADLS_SFTP_SINK_accountKey')]"
 					},
+					"LS_AZBLOB_BULK_SRV_connectionString": {
+						"value": "[parameters('LS_AZBLOB_BULK_SRV_connectionString')]"
+					},
+					"LS_AZBLOB_CHID_JSONSINK_connectionString": {
+						"value": "[parameters('LS_AZBLOB_CHID_JSONSINK_connectionString')]"
+					},
+					"LS_AZBLOB_CHID_JSONSRV_connectionString": {
+						"value": "[parameters('LS_AZBLOB_CHID_JSONSRV_connectionString')]"
+					},
+					"LS_AZBLOB_CHID_SINK_connectionString": {
+						"value": "[parameters('LS_AZBLOB_CHID_SINK_connectionString')]"
+					},
+					"LS_AZBLOB_CHID_SRV_connectionString": {
+						"value": "[parameters('LS_AZBLOB_CHID_SRV_connectionString')]"
+					},
+					"LS_AZBLOB_CHILD_connectionString": {
+						"value": "[parameters('LS_AZBLOB_CHILD_connectionString')]"
+					},
 					"LS_AZSQLDB_METADATA_password": {
 						"value": "[parameters('LS_AZSQLDB_METADATA_password')]"
 					},
@@ -114,6 +156,26 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "ADF-VBB8-ETL-DEV_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADF-VBB8-ETL-DEV_ArmTemplate_0')]"
+			]
 		}
 	]
 }

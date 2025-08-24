@@ -8,6 +8,24 @@
 		"LS_AZADLS_SFTP_SINK_accountKey": {
 			"value": ""
 		},
+		"LS_AZBLOB_BULK_SRV_connectionString": {
+			"value": ""
+		},
+		"LS_AZBLOB_CHID_JSONSINK_connectionString": {
+			"value": ""
+		},
+		"LS_AZBLOB_CHID_JSONSRV_connectionString": {
+			"value": ""
+		},
+		"LS_AZBLOB_CHID_SINK_connectionString": {
+			"value": ""
+		},
+		"LS_AZBLOB_CHID_SRV_connectionString": {
+			"value": ""
+		},
+		"LS_AZBLOB_CHILD_connectionString": {
+			"value": ""
+		},
 		"LS_AZSQLDB_METADATA_password": {
 			"value": ""
 		},
