@@ -79,12 +79,15 @@
 							"value": "api",
 							"activities": [
 								{
-									"name": "Wait3",
-									"type": "Wait",
+									"name": "EXEC_PL_RESTAPI",
+									"type": "ExecutePipeline",
 									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
 									"userProperties": [],
 									"typeProperties": {
-										"waitTimeInSeconds": 1
+										"waitOnCompletion": true
 									}
 								}
 							]
