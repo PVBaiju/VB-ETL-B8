@@ -1,0 +1,21 @@
+{
+	"name": "LSSqlServermig",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "DESKTOP-ZATNEVE",
+			"database": "sql_ecom_db",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "vbtest",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIyNjc4M2MwYy0wYTMxLTRkMTItODY3MC04MDA2NjMxZjc1N2UiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "SHIR-ONPREM-SQL",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
