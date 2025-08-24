@@ -26,11 +26,411 @@
 							"type": "JsonReadSettings"
 						}
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['_id']"
+								},
+								"sink": {
+									"name": "_id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['index']"
+								},
+								"sink": {
+									"name": "index"
+								}
+							},
+							{
+								"source": {
+									"path": "$['guid']"
+								},
+								"sink": {
+									"name": "guid"
+								}
+							},
+							{
+								"source": {
+									"path": "$['isActive']"
+								},
+								"sink": {
+									"name": "isActive"
+								}
+							},
+							{
+								"source": {
+									"path": "$['balance']"
+								},
+								"sink": {
+									"name": "balance"
+								}
+							},
+							{
+								"source": {
+									"path": "$['picture']"
+								},
+								"sink": {
+									"name": "picture"
+								}
+							},
+							{
+								"source": {
+									"path": "$['age']"
+								},
+								"sink": {
+									"name": "age"
+								}
+							},
+							{
+								"source": {
+									"path": "$['eyeColor']"
+								},
+								"sink": {
+									"name": "eyeColor"
+								}
+							},
+							{
+								"source": {
+									"path": "$['name']"
+								},
+								"sink": {
+									"name": "name"
+								}
+							},
+							{
+								"source": {
+									"path": "$['gender']"
+								},
+								"sink": {
+									"name": "gender"
+								}
+							},
+							{
+								"source": {
+									"path": "$['company']"
+								},
+								"sink": {
+									"name": "company"
+								}
+							},
+							{
+								"source": {
+									"path": "$['email']"
+								},
+								"sink": {
+									"name": "email"
+								}
+							},
+							{
+								"source": {
+									"path": "$['phone']"
+								},
+								"sink": {
+									"name": "phone"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']"
+								},
+								"sink": {
+									"name": "address"
+								}
+							},
+							{
+								"source": {
+									"path": "$['about']"
+								},
+								"sink": {
+									"name": "about"
+								}
+							},
+							{
+								"source": {
+									"path": "$['registered']"
+								},
+								"sink": {
+									"name": "registered"
+								}
+							},
+							{
+								"source": {
+									"path": "$['latitude']"
+								},
+								"sink": {
+									"name": "latitude"
+								}
+							},
+							{
+								"source": {
+									"path": "$['longitude']"
+								},
+								"sink": {
+									"name": "longitude"
+								}
+							},
+							{
+								"source": {
+									"path": "$['tags'][0]"
+								},
+								"sink": {
+									"name": "tags']["
+								}
+							},
+							{
+								"source": {
+									"path": "['id']"
+								},
+								"sink": {
+									"name": "friends'][0]['id"
+								}
+							},
+							{
+								"source": {
+									"path": "['name']"
+								},
+								"sink": {
+									"name": "friends'][0]['name"
+								}
+							},
+							{
+								"source": {
+									"path": "$['greeting']"
+								},
+								"sink": {
+									"name": "greeting"
+								}
+							},
+							{
+								"source": {
+									"path": "$['favoriteFruit']"
+								},
+								"sink": {
+									"name": "favoriteFruit"
+								}
+							},
+							{
+								"source": {
+									"path": "$['commitInfo']['timestamp']"
+								},
+								"sink": {
+									"name": "timestamp"
+								}
+							},
+							{
+								"source": {
+									"path": "$['commitInfo']['userId']"
+								},
+								"sink": {
+									"name": "userId"
+								}
+							},
+							{
+								"source": {
+									"path": "$['commitInfo']['userName']"
+								},
+								"sink": {
+									"name": "userName"
+								}
+							},
+							{
+								"source": {
+									"path": "$['commitInfo']['operation']"
+								},
+								"sink": {
+									"name": "operation"
+								}
+							},
+							{
+								"source": {
+									"path": "$['commitInfo']['operationParameters']['mode']"
+								},
+								"sink": {
+									"name": "mode"
+								}
+							},
+							{
+								"source": {
+									"path": "$['commitInfo']['operationParameters']['partitionBy']"
+								},
+								"sink": {
+									"name": "partitionBy"
+								}
+							},
+							{
+								"source": {
+									"path": "$['commitInfo']['notebook']['notebookId']"
+								},
+								"sink": {
+									"name": "notebookId"
+								}
+							},
+							{
+								"source": {
+									"path": "$['commitInfo']['clusterId']"
+								},
+								"sink": {
+									"name": "clusterId"
+								}
+							},
+							{
+								"source": {
+									"path": "$['commitInfo']['isolationLevel']"
+								},
+								"sink": {
+									"name": "isolationLevel"
+								}
+							},
+							{
+								"source": {
+									"path": "$['commitInfo']['isBlindAppend']"
+								},
+								"sink": {
+									"name": "isBlindAppend"
+								}
+							},
+							{
+								"source": {
+									"path": "$['commitInfo']['operationMetrics']['numFiles']"
+								},
+								"sink": {
+									"name": "numFiles"
+								}
+							},
+							{
+								"source": {
+									"path": "$['commitInfo']['operationMetrics']['numOutputRows']"
+								},
+								"sink": {
+									"name": "numOutputRows"
+								}
+							},
+							{
+								"source": {
+									"path": "$['commitInfo']['operationMetrics']['numOutputBytes']"
+								},
+								"sink": {
+									"name": "numOutputBytes"
+								}
+							},
+							{
+								"source": {
+									"path": "$['commitInfo']['engineInfo']"
+								},
+								"sink": {
+									"name": "engineInfo"
+								}
+							},
+							{
+								"source": {
+									"path": "$['commitInfo']['txnId']"
+								},
+								"sink": {
+									"name": "txnId"
+								}
+							},
+							{
+								"source": {
+									"path": "$['protocol']['minReaderVersion']"
+								},
+								"sink": {
+									"name": "minReaderVersion"
+								}
+							},
+							{
+								"source": {
+									"path": "$['protocol']['minWriterVersion']"
+								},
+								"sink": {
+									"name": "minWriterVersion"
+								}
+							},
+							{
+								"source": {
+									"path": "$['metaData']['id']"
+								},
+								"sink": {
+									"name": "metaData_id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['metaData']['format']['provider']"
+								},
+								"sink": {
+									"name": "provider"
+								}
+							},
+							{
+								"source": {
+									"path": "$['metaData']['format']['options']"
+								},
+								"sink": {
+									"name": "options"
+								}
+							},
+							{
+								"source": {
+									"path": "$['metaData']['schemaString']"
+								},
+								"sink": {
+									"name": "schemaString"
+								}
+							},
+							{
+								"source": {
+									"path": "$['metaData']['partitionColumns'][0]"
+								},
+								"sink": {
+									"name": "metaData_partitionColumns']["
+								}
+							},
+							{
+								"source": {
+									"path": "$['metaData']['configuration']"
+								},
+								"sink": {
+									"name": "configuration"
+								}
+							},
+							{
+								"source": {
+									"path": "$['metaData']['createdTime']"
+								},
+								"sink": {
+									"name": "createdTime"
+								}
+							}
+						],
+						"collectionReference": "$['friends']",
+						"mapComplexValuesToString": false
+					}
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_AZADLS_JSON_FLAT_SINK",
+						"referenceName": "DS_AZBLOB_JSON_FLAT_SRC",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_AZBLOB_JSON_FLAT_CSV_SINK",
 						"type": "DatasetReference"
 					}
 				]

@@ -1,0 +1,21 @@
+{
+	"name": "DS_AZBLOB_JSON_FLAT_CSV_SINK",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZBLOB_JSON_FLAT_SINK",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"name": "DS_AZBLOB_JSON_FLAT_SRC",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZADLS_JSON_SRC",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation"
+			}
+		},
+		"schema": {}
+	}
+}
