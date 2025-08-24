@@ -1,0 +1,12 @@
+{
+	"name": "LS_RESTAPI_SRC",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://retool.com/utilities/generate-api-from-csv",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
