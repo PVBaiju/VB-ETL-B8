@@ -43,6 +43,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_SFTP_SINK'"
 		},
+		"LS_AZADLS_JSON_SRC_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_JSON_SRC'"
+		},
+		"LS_AZBLOB_JSON_FLAT_SINK_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_AZBLOB_JSON_FLAT_SINK'"
+		},
 		"LS_AZADLS_SFTP_SINK_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlssftpsinkdev.dfs.core.windows.net"
@@ -74,6 +82,14 @@
 		"LS_SFTP_SINK_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "adlssftpsinkdev.sftpsink"
+		},
+		"LS_AZADLS_JSON_SRC_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsvbsrvraw.dfs.core.windows.net/"
+		},
+		"LS_AZBLOB_JSON_FLAT_SINK_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsvbsinkdev.dfs.core.windows.net/"
 		},
 		"containerUri": {
 			"type": "string",
@@ -129,6 +145,12 @@
 					"LS_SFTP_SINK_password": {
 						"value": "[parameters('LS_SFTP_SINK_password')]"
 					},
+					"LS_AZADLS_JSON_SRC_accountKey": {
+						"value": "[parameters('LS_AZADLS_JSON_SRC_accountKey')]"
+					},
+					"LS_AZBLOB_JSON_FLAT_SINK_accountKey": {
+						"value": "[parameters('LS_AZBLOB_JSON_FLAT_SINK_accountKey')]"
+					},
 					"LS_AZADLS_SFTP_SINK_properties_typeProperties_url": {
 						"value": "[parameters('LS_AZADLS_SFTP_SINK_properties_typeProperties_url')]"
 					},
@@ -152,6 +174,12 @@
 					},
 					"LS_SFTP_SINK_properties_typeProperties_userName": {
 						"value": "[parameters('LS_SFTP_SINK_properties_typeProperties_userName')]"
+					},
+					"LS_AZADLS_JSON_SRC_properties_typeProperties_url": {
+						"value": "[parameters('LS_AZADLS_JSON_SRC_properties_typeProperties_url')]"
+					},
+					"LS_AZBLOB_JSON_FLAT_SINK_properties_typeProperties_url": {
+						"value": "[parameters('LS_AZBLOB_JSON_FLAT_SINK_properties_typeProperties_url')]"
 					}
 				}
 			},
