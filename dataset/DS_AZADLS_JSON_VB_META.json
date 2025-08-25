@@ -1,14 +1,9 @@
 {
-	"name": "DS_AZADLS_JSON_VB_RAW",
+	"name": "DS_AZADLS_JSON_VB_META",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LS_AZADLS_VB_RAW",
 			"type": "LinkedServiceReference"
-		},
-		"parameters": {
-			"fie": {
-				"type": "string"
-			}
 		},
 		"annotations": [],
 		"type": "Json",

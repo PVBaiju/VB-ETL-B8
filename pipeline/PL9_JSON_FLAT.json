@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "DS_AZADLS_JSON_VB_RAW",
+						"referenceName": "DS_AZADLS_JSON_VB_META",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
@@ -304,13 +304,7 @@
 							"inputs": [
 								{
 									"referenceName": "DS_AZADLS_JSON_VB_RAW",
-									"type": "DatasetReference",
-									"parameters": {
-										"filename": {
-											"value": "@item().name",
-											"type": "Expression"
-										}
-									}
+									"type": "DatasetReference"
 								}
 							],
 							"outputs": [
