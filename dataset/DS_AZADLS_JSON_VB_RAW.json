@@ -5,11 +5,20 @@
 			"referenceName": "LS_AZADLS_VB_RAW",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
 				"fileSystem": "input"
 			}
 		},

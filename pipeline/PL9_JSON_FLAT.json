@@ -303,8 +303,14 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "DS_AZADLS_COPY_JSONFLAT_RAW",
-									"type": "DatasetReference"
+									"referenceName": "DS_AZADLS_JSON_VB_RAW",
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [
