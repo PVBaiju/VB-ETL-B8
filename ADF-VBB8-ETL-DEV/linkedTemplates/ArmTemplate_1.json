@@ -57,7 +57,8 @@
 						"folderPath": {
 							"value": "@dataset().folder",
 							"type": "Expression"
-						}
+						},
+						"fileSystem": "json"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -231,7 +232,7 @@
 							"value": "@dataset().folder",
 							"type": "Expression"
 						},
-						"fileSystem": "output"
+						"fileSystem": "sftp"
 					}
 				}
 			},
