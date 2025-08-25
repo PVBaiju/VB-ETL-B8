@@ -307,6 +307,9 @@
 				"parameters": {
 					"folder": {
 						"type": "string"
+					},
+					"filename": {
+						"type": "string"
 					}
 				},
 				"annotations": [],
@@ -314,12 +317,15 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "orderpayment",
+						"fileName": {
+							"value": "@concat(replace(dataset().filename,'.parquet',''),'_',formatDateTime(utcNow(),'yyyy-MM-dd HH:mm:ss'),'.parquet')\n",
+							"type": "Expression"
+						},
 						"folderPath": {
 							"value": "@dataset().folder",
 							"type": "Expression"
 						},
-						"fileSystem": "orderpayments"
+						"fileSystem": "output"
 					},
 					"compressionCodec": "snappy"
 				},
@@ -1863,7 +1869,8 @@
 									"folder": {
 										"value": "@concat(formatDateTime(utcNow(),'yyyy'),'/',formatDateTime(utcNow(),'MM'),'/',formatDateTime(utcNow(),'dd'),'/')",
 										"type": "Expression"
-									}
+									},
+									"filename": "orderpayment"
 								}
 							}
 						]

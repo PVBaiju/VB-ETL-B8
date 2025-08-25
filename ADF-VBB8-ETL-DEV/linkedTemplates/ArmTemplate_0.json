@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_JSON_SRC'"
 		},
+		"LS_AZADLS_MIGRATION_SINK_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_MIGRATION_SINK'"
+		},
 		"LS_AZADLS_SFTP_SINK_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_SFTP_SINK'"
@@ -51,13 +55,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_SFTP_SINK'"
 		},
-		"LS_AZADLS_MIGRATION_SINK_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_MIGRATION_SINK'"
-		},
 		"LS_AZADLS_JSON_SRC_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsvbsrvraw.dfs.core.windows.net/"
+		},
+		"LS_AZADLS_MIGRATION_SINK_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevvbsrc01.dfs.core.windows.net/"
 		},
 		"LS_AZADLS_SFTP_SINK_properties_typeProperties_url": {
 			"type": "string",
@@ -98,10 +102,6 @@
 		"LS_SFTP_SINK_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "adlssftpsinkdev.sftpsink"
-		},
-		"LS_AZADLS_MIGRATION_SINK_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://adlsdevvbsrc01.dfs.core.windows.net/"
 		}
 	},
 	"variables": {
@@ -148,6 +148,23 @@
 					"accountKey": {
 						"type": "SecureString",
 						"value": "[parameters('LS_AZADLS_JSON_SRC_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_AZADLS_MIGRATION_SINK')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_AZADLS_MIGRATION_SINK_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_AZADLS_MIGRATION_SINK_accountKey')]"
 					}
 				}
 			},
@@ -368,23 +385,6 @@
 			"properties": {
 				"type": "SelfHosted",
 				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_AZADLS_MIGRATION_SINK')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('LS_AZADLS_MIGRATION_SINK_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('LS_AZADLS_MIGRATION_SINK_accountKey')]"
-					}
-				}
 			},
 			"dependsOn": []
 		},

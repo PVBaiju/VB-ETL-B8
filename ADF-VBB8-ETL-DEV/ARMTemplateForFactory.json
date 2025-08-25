@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_JSON_SRC'"
 		},
+		"LS_AZADLS_MIGRATION_SINK_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_MIGRATION_SINK'"
+		},
 		"LS_AZADLS_SFTP_SINK_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_SFTP_SINK'"
@@ -55,10 +59,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_SFTP_SINK'"
 		},
-		"LS_AZADLS_MIGRATION_SINK_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_MIGRATION_SINK'"
-		},
 		"LSSqlServermig_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "DESKTOP-ZATNEVE"
@@ -74,6 +74,10 @@
 		"LS_AZADLS_JSON_SRC_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsvbsrvraw.dfs.core.windows.net/"
+		},
+		"LS_AZADLS_MIGRATION_SINK_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevvbsrc01.dfs.core.windows.net/"
 		},
 		"LS_AZADLS_SFTP_SINK_properties_typeProperties_url": {
 			"type": "string",
@@ -114,10 +118,6 @@
 		"LS_SFTP_SINK_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "adlssftpsinkdev.sftpsink"
-		},
-		"LS_AZADLS_MIGRATION_SINK_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://adlsdevvbsrc01.dfs.core.windows.net/"
 		}
 	},
 	"variables": {
@@ -1363,7 +1363,8 @@
 									"folder": {
 										"value": "@concat(formatDateTime(utcNow(),'yyyy'),'/',formatDateTime(utcNow(),'MM'),'/',formatDateTime(utcNow(),'dd'),'/')",
 										"type": "Expression"
-									}
+									},
+									"filename": "orderpayment"
 								}
 							}
 						]
@@ -2450,6 +2451,9 @@
 				"parameters": {
 					"folder": {
 						"type": "string"
+					},
+					"filename": {
+						"type": "string"
 					}
 				},
 				"annotations": [],
@@ -2457,12 +2461,15 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "orderpayment",
+						"fileName": {
+							"value": "@concat(replace(dataset().filename,'.parquet',''),'_',formatDateTime(utcNow(),'yyyy-MM-dd HH:mm:ss'),'.parquet')\n",
+							"type": "Expression"
+						},
 						"folderPath": {
 							"value": "@dataset().folder",
 							"type": "Expression"
 						},
-						"fileSystem": "orderpayments"
+						"fileSystem": "output"
 					},
 					"compressionCodec": "snappy"
 				},
@@ -2660,6 +2667,23 @@
 					"accountKey": {
 						"type": "SecureString",
 						"value": "[parameters('LS_AZADLS_JSON_SRC_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_AZADLS_MIGRATION_SINK')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_AZADLS_MIGRATION_SINK_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_AZADLS_MIGRATION_SINK_accountKey')]"
 					}
 				}
 			},
@@ -2880,23 +2904,6 @@
 			"properties": {
 				"type": "SelfHosted",
 				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_AZADLS_MIGRATION_SINK')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('LS_AZADLS_MIGRATION_SINK_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('LS_AZADLS_MIGRATION_SINK_accountKey')]"
-					}
-				}
 			},
 			"dependsOn": []
 		}
