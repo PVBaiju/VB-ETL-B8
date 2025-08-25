@@ -6,12 +6,122 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "ADF-VBB8-ETL-DEV"
+		},
+		"LSSqlServermig_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LSSqlServermig'"
+		},
+		"LSSqlServermig_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "DESKTOP-ZATNEVE"
+		},
+		"LSSqlServermig_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sql_ecom_db"
+		},
+		"LSSqlServermig_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "vbtest"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_AZBLOB_JSONSRV_CHILD')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_AZBLOB_CHID_JSONSRV",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"sourcefile": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().sourcefile",
+							"type": "Expression"
+						},
+						"container": "rawdata"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_AZBLOB_JSON_FLAT_CSV_SINK')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_AZBLOB_JSON_FLAT_SINK",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"sinkfile": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().sinkfile",
+							"type": "Expression"
+						},
+						"fileSystem": "flatcsv"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_AZBLOB_JSON_FLAT_SRC')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_AZADLS_JSON_SRC",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"srcfile": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().srcfile",
+							"type": "Expression"
+						},
+						"fileSystem": "json"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DS_AZBLOB_SINK_CSV')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -186,6 +296,29 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DS_AZSQLSRV_MIGRATION_PRQUT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_AZADLS_MIGRATION_SINK",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "orderpayment",
+						"fileSystem": "orderpayments"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DS_GET_SFTP_VALUES')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -264,6 +397,32 @@
 						},
 						"fileSystem": "sftp"
 					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LSSqlServermig')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('LSSqlServermig_properties_typeProperties_server')]",
+					"database": "[parameters('LSSqlServermig_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SQL",
+					"userName": "[parameters('LSSqlServermig_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LSSqlServermig_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "SHIR-ONPREM-SQL",
+					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": []
@@ -538,7 +697,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_AZBLOB_SRV_CHILD')]",
-				"[concat(variables('factoryId'), '/datasets/DS_AZBLOB_SINK_CSV')]"
+				"[concat(variables('factoryId'), '/datasets/DS_AZBLOB_SINK_CSV')]",
+				"[concat(variables('factoryId'), '/datasets/DS_AZBLOB_JSONSRV_CHILD')]"
 			]
 		},
 		{
@@ -1371,7 +1531,7 @@
 														"path": "$['tags'][0]"
 													},
 													"sink": {
-														"name": "tags']["
+														"name": "items"
 													}
 												},
 												{
@@ -1379,7 +1539,7 @@
 														"path": "[['id']"
 													},
 													"sink": {
-														"name": "friends'][0]['id"
+														"name": "id"
 													}
 												},
 												{
@@ -1404,198 +1564,6 @@
 													},
 													"sink": {
 														"name": "favoriteFruit"
-													}
-												},
-												{
-													"source": {
-														"path": "$['commitInfo']['timestamp']"
-													},
-													"sink": {
-														"name": "timestamp"
-													}
-												},
-												{
-													"source": {
-														"path": "$['commitInfo']['userId']"
-													},
-													"sink": {
-														"name": "userId"
-													}
-												},
-												{
-													"source": {
-														"path": "$['commitInfo']['userName']"
-													},
-													"sink": {
-														"name": "userName"
-													}
-												},
-												{
-													"source": {
-														"path": "$['commitInfo']['operation']"
-													},
-													"sink": {
-														"name": "operation"
-													}
-												},
-												{
-													"source": {
-														"path": "$['commitInfo']['operationParameters']['mode']"
-													},
-													"sink": {
-														"name": "mode"
-													}
-												},
-												{
-													"source": {
-														"path": "$['commitInfo']['operationParameters']['partitionBy']"
-													},
-													"sink": {
-														"name": "partitionBy"
-													}
-												},
-												{
-													"source": {
-														"path": "$['commitInfo']['notebook']['notebookId']"
-													},
-													"sink": {
-														"name": "notebookId"
-													}
-												},
-												{
-													"source": {
-														"path": "$['commitInfo']['clusterId']"
-													},
-													"sink": {
-														"name": "clusterId"
-													}
-												},
-												{
-													"source": {
-														"path": "$['commitInfo']['isolationLevel']"
-													},
-													"sink": {
-														"name": "isolationLevel"
-													}
-												},
-												{
-													"source": {
-														"path": "$['commitInfo']['isBlindAppend']"
-													},
-													"sink": {
-														"name": "isBlindAppend"
-													}
-												},
-												{
-													"source": {
-														"path": "$['commitInfo']['operationMetrics']['numFiles']"
-													},
-													"sink": {
-														"name": "numFiles"
-													}
-												},
-												{
-													"source": {
-														"path": "$['commitInfo']['operationMetrics']['numOutputRows']"
-													},
-													"sink": {
-														"name": "numOutputRows"
-													}
-												},
-												{
-													"source": {
-														"path": "$['commitInfo']['operationMetrics']['numOutputBytes']"
-													},
-													"sink": {
-														"name": "numOutputBytes"
-													}
-												},
-												{
-													"source": {
-														"path": "$['commitInfo']['engineInfo']"
-													},
-													"sink": {
-														"name": "engineInfo"
-													}
-												},
-												{
-													"source": {
-														"path": "$['commitInfo']['txnId']"
-													},
-													"sink": {
-														"name": "txnId"
-													}
-												},
-												{
-													"source": {
-														"path": "$['protocol']['minReaderVersion']"
-													},
-													"sink": {
-														"name": "minReaderVersion"
-													}
-												},
-												{
-													"source": {
-														"path": "$['protocol']['minWriterVersion']"
-													},
-													"sink": {
-														"name": "minWriterVersion"
-													}
-												},
-												{
-													"source": {
-														"path": "$['metaData']['id']"
-													},
-													"sink": {
-														"name": "metaData_id"
-													}
-												},
-												{
-													"source": {
-														"path": "$['metaData']['format']['provider']"
-													},
-													"sink": {
-														"name": "provider"
-													}
-												},
-												{
-													"source": {
-														"path": "$['metaData']['format']['options']"
-													},
-													"sink": {
-														"name": "options"
-													}
-												},
-												{
-													"source": {
-														"path": "$['metaData']['schemaString']"
-													},
-													"sink": {
-														"name": "schemaString"
-													}
-												},
-												{
-													"source": {
-														"path": "$['metaData']['partitionColumns'][0]"
-													},
-													"sink": {
-														"name": "metaData_partitionColumns']["
-													}
-												},
-												{
-													"source": {
-														"path": "$['metaData']['configuration']"
-													},
-													"sink": {
-														"name": "configuration"
-													}
-												},
-												{
-													"source": {
-														"path": "$['metaData']['createdTime']"
-													},
-													"sink": {
-														"name": "createdTime"
 													}
 												}
 											],
@@ -1642,7 +1610,69 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_AZBLOB_JSON_FLAT_SRC')]",
+				"[concat(variables('factoryId'), '/datasets/DS_AZBLOB_JSON_FLAT_CSV_SINK')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_AZSQLSRV_MIGRATION_SRC')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LSSqlServermig",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "order_id",
+						"type": "nvarchar"
+					},
+					{
+						"name": "customer_id",
+						"type": "nvarchar"
+					},
+					{
+						"name": "order_status",
+						"type": "nvarchar"
+					},
+					{
+						"name": "order_purchase_timestamp",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "order_approved_at",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "order_delivered_carrier_date",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "order_delivered_customer_date",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "order_estimated_delivery_date",
+						"type": "datetime2",
+						"scale": 7
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "order_payments_dataset"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LSSqlServermig')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/PL4_FILETYPE_CSV_EXCEL')]",
@@ -1767,14 +1797,14 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/PL3_CLOUDSG_CSV_EXCEL')]",
+			"name": "[concat(parameters('factoryName'), '/PL6_SQL_MIgration')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "LKUP_SRC_FILES",
-						"type": "Lookup",
+						"name": "COPY SQL TABLE",
+						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
@@ -1786,318 +1816,43 @@
 						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderQuery": {
-									"value": "SELECT DISTINCT L3_switch_type \nFROM dbo.vb_tbl_job a\nJOIN dbo.vb_tbl_trigger b ON a.trigger_id = b.trigger_id\nWHERE b.trigger_name = '@{pipeline().parameters.Trigger}'\n",
-									"type": "Expression"
-								},
+								"type": "SqlServerSource",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
-							"dataset": {
-								"referenceName": "DS_AZSQLDB_METADATA",
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_AZSQLSRV_MIGRATION_SRC",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
-						}
-					},
-					{
-						"name": "Switch_SRC_LOC_CSV_EXCEL",
-						"type": "Switch",
-						"dependsOn": [
-							{
-								"activity": "LKUP_SRC_FILES",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
 						],
-						"userProperties": [],
-						"typeProperties": {
-							"on": {
-								"value": "@activity('LKUP_SRC_FILES').output.firstRow.L3_switch_type",
-								"type": "Expression"
-							},
-							"cases": [
-								{
-									"value": "Azure",
-									"activities": [
-										{
-											"name": "Exec_file_CSV",
-											"type": "ExecutePipeline",
-											"dependsOn": [],
-											"policy": {
-												"secureInput": false
-											},
-											"userProperties": [],
-											"typeProperties": {
-												"pipeline": {
-													"referenceName": "PL4_FILETYPE_CSV_EXCEL",
-													"type": "PipelineReference"
-												},
-												"waitOnCompletion": true,
-												"parameters": {
-													"Trigger": {
-														"value": "@pipeline().parameters.Trigger",
-														"type": "Expression"
-													}
-												}
-											}
-										}
-									]
-								},
-								{
-									"value": "aws",
-									"activities": [
-										{
-											"name": "Wait2",
-											"type": "Wait",
-											"dependsOn": [],
-											"userProperties": [],
-											"typeProperties": {
-												"waitTimeInSeconds": 1
-											}
-										}
-									]
-								},
-								{
-									"value": "gcp",
-									"activities": [
-										{
-											"name": "Wait3",
-											"type": "Wait",
-											"dependsOn": [],
-											"userProperties": [],
-											"typeProperties": {
-												"waitTimeInSeconds": 1
-											}
-										}
-									]
-								}
-							]
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"parameters": {
-					"Trigger": {
-						"type": "string"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS_AZSQLDB_METADATA')]",
-				"[concat(variables('factoryId'), '/pipelines/PL4_FILETYPE_CSV_EXCEL')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL2_RAW_DATA')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "LKUP_L2_TYPE",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderQuery": {
-									"value": "SELECT DISTINCT L2_switch_type \nFROM dbo.vb_tbl_job a\nJOIN dbo.vb_tbl_trigger b ON a.trigger_id = b.trigger_id\nWHERE b.trigger_name = '@{pipeline().parameters.Trigger}'\n\n",
-									"type": "Expression"
-								},
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "DS_AZSQLDB_METADATA",
+						"outputs": [
+							{
+								"referenceName": "DS_AZSQLSRV_MIGRATION_PRQUT",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
-						}
-					},
-					{
-						"name": "SWITCH_SOURCE",
-						"type": "Switch",
-						"dependsOn": [
-							{
-								"activity": "LKUP_L2_TYPE",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"on": {
-								"value": "@activity('LKUP_L2_TYPE').output.firstRow.L2_switch_type",
-								"type": "Expression"
-							},
-							"cases": [
-								{
-									"value": "CloudStorage",
-									"activities": [
-										{
-											"name": "EXEC_PL3_DATA",
-											"type": "ExecutePipeline",
-											"dependsOn": [],
-											"policy": {
-												"secureInput": false
-											},
-											"userProperties": [],
-											"typeProperties": {
-												"pipeline": {
-													"referenceName": "PL3_CLOUDSG_CSV_EXCEL",
-													"type": "PipelineReference"
-												},
-												"waitOnCompletion": true,
-												"parameters": {
-													"Trigger": {
-														"value": "@pipeline().parameters.Trigger",
-														"type": "Expression"
-													}
-												}
-											}
-										}
-									]
-								},
-								{
-									"value": "api",
-									"activities": [
-										{
-											"name": "Wait3",
-											"type": "Wait",
-											"dependsOn": [],
-											"userProperties": [],
-											"typeProperties": {
-												"waitTimeInSeconds": 1
-											}
-										}
-									]
-								},
-								{
-									"value": "sql",
-									"activities": [
-										{
-											"name": "Wait4",
-											"type": "Wait",
-											"dependsOn": [],
-											"userProperties": [],
-											"typeProperties": {
-												"waitTimeInSeconds": 1
-											}
-										}
-									]
-								},
-								{
-									"value": "sftp",
-									"activities": [
-										{
-											"name": "EXEC_SFTP_PL",
-											"type": "ExecutePipeline",
-											"dependsOn": [],
-											"policy": {
-												"secureInput": false
-											},
-											"userProperties": [],
-											"typeProperties": {
-												"pipeline": {
-													"referenceName": "PL7_SFTP",
-													"type": "PipelineReference"
-												},
-												"waitOnCompletion": true,
-												"parameters": {
-													"Trigger": {
-														"value": "@pipeline().parameters.Trigger",
-														"type": "Expression"
-													}
-												}
-											}
-										}
-									]
-								},
-								{
-									"value": "snowflake",
-									"activities": [
-										{
-											"name": "Wait6",
-											"type": "Wait",
-											"dependsOn": [],
-											"userProperties": [],
-											"typeProperties": {
-												"waitTimeInSeconds": 1
-											}
-										}
-									]
-								},
-								{
-									"value": "json",
-									"activities": [
-										{
-											"name": "EXEC JSOC FLAT CSV",
-											"type": "ExecutePipeline",
-											"dependsOn": [],
-											"policy": {
-												"secureInput": false
-											},
-											"userProperties": [],
-											"typeProperties": {
-												"pipeline": {
-													"referenceName": "PL9_JSON_FLAT",
-													"type": "PipelineReference"
-												},
-												"waitOnCompletion": true,
-												"parameters": {
-													"Trigger": {
-														"value": "@pipeline().parameters.Trigger",
-														"type": "Expression"
-													}
-												}
-											}
-										}
-									]
-								},
-								{
-									"value": "bulk",
-									"activities": [
-										{
-											"name": "Exec_BULK_DIFF_FOLDER",
-											"type": "ExecutePipeline",
-											"dependsOn": [],
-											"policy": {
-												"secureInput": false
-											},
-											"userProperties": [],
-											"typeProperties": {
-												"pipeline": {
-													"referenceName": "PL10_BULK_FOLDERS",
-													"type": "PipelineReference"
-												},
-												"waitOnCompletion": true,
-												"parameters": {
-													"Trigger": {
-														"value": "@pipeline().parameters.Trigger",
-														"type": "Expression"
-													}
-												}
-											}
-										}
-									]
-								}
-							]
-						}
+						]
 					}
 				],
 				"policy": {
@@ -2108,91 +1863,11 @@
 						"type": "string"
 					}
 				},
-				"variables": {
-					"Mapping": {
-						"type": "String"
-					}
-				},
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS_AZSQLDB_METADATA')]",
-				"[concat(variables('factoryId'), '/pipelines/PL3_CLOUDSG_CSV_EXCEL')]",
-				"[concat(variables('factoryId'), '/pipelines/PL7_SFTP')]",
-				"[concat(variables('factoryId'), '/pipelines/PL9_JSON_FLAT')]",
-				"[concat(variables('factoryId'), '/pipelines/PL10_BULK_FOLDERS')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL1_MASTER')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "EXEC_RAW_DATA",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "SET_VAR_TRIGGER",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "PL2_RAW_DATA",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {
-								"Trigger": {
-									"value": "@pipeline().parameters.Trigger",
-									"type": "Expression"
-								}
-							}
-						}
-					},
-					{
-						"name": "SET_VAR_TRIGGER",
-						"type": "SetVariable",
-						"dependsOn": [],
-						"policy": {
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "Trigger_variable",
-							"value": {
-								"value": "@if(equals(pipeline().parameters.Trigger, null),pipeline().TriggerName,pipeline().parameters.Trigger)",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"parameters": {
-					"Trigger": {
-						"type": "string"
-					}
-				},
-				"variables": {
-					"Trigger_variable": {
-						"type": "String"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL2_RAW_DATA')]"
+				"[concat(variables('factoryId'), '/datasets/DS_AZSQLSRV_MIGRATION_SRC')]",
+				"[concat(variables('factoryId'), '/datasets/DS_AZSQLSRV_MIGRATION_PRQUT')]"
 			]
 		}
 	]

@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "ADF-VBB8-ETL-DEV"
 		},
+		"LSSqlServermig_password": {
+			"value": ""
+		},
 		"LS_AZADLS_JSON_SRC_accountKey": {
 			"value": ""
 		},
@@ -38,6 +41,18 @@
 		"LS_SFTP_SINK_password": {
 			"value": ""
 		},
+		"LS_AZADLS_MIGRATION_SINK_accountKey": {
+			"value": ""
+		},
+		"LSSqlServermig_properties_typeProperties_server": {
+			"value": "DESKTOP-ZATNEVE"
+		},
+		"LSSqlServermig_properties_typeProperties_database": {
+			"value": "sql_ecom_db"
+		},
+		"LSSqlServermig_properties_typeProperties_userName": {
+			"value": "vbtest"
+		},
 		"LS_AZADLS_JSON_SRC_properties_typeProperties_url": {
 			"value": "https://adlsvbsrvraw.dfs.core.windows.net/"
 		},
@@ -62,11 +77,17 @@
 		"LS_AZSQLDB_METADATA_properties_typeProperties_userName": {
 			"value": "access-data-dev"
 		},
+		"LS_RESTAPI_SRC_properties_typeProperties_url": {
+			"value": "https://retool.com/utilities/generate-api-from-csv"
+		},
 		"LS_SFTP_SINK_properties_typeProperties_host": {
 			"value": "adlssftpsinkdev.blob.core.windows.net"
 		},
 		"LS_SFTP_SINK_properties_typeProperties_userName": {
 			"value": "adlssftpsinkdev.sftpsink"
+		},
+		"LS_AZADLS_MIGRATION_SINK_properties_typeProperties_url": {
+			"value": "https://adlsdevvbsrc01.dfs.core.windows.net/"
 		}
 	}
 }
