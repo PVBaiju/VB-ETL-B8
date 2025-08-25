@@ -2,7 +2,7 @@
 	"name": "DS_AZADLS_SFTP_RAW",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_AZADLS_SFTP_COPY_SRC",
+			"referenceName": "LS_AZADLS_SFTP",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
