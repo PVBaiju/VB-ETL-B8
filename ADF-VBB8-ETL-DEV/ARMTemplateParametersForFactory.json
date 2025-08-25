@@ -8,13 +8,22 @@
 		"LSSqlServermig_password": {
 			"value": ""
 		},
-		"LS_AZADLS_JSON_SRC_accountKey": {
+		"LS_AZADLS_JSONFLAT_METADATA_accountKey": {
 			"value": ""
 		},
-		"LS_AZADLS_MIGRATION_SINK_accountKey": {
+		"LS_AZADLS_SFTP_password": {
 			"value": ""
 		},
-		"LS_AZADLS_SFTP_SINK_accountKey": {
+		"LS_AZADLS_SFTP_COPY_SRC_password": {
+			"value": ""
+		},
+		"LS_AZADLS_VBSRC_SINK_accountKey": {
+			"value": ""
+		},
+		"LS_AZADLS_VB_RAW_accountKey": {
+			"value": ""
+		},
+		"LS_AZADLS_VB_SINK_accountKey": {
 			"value": ""
 		},
 		"LS_AZBLOB_BULK_SRV_connectionString": {
@@ -53,14 +62,29 @@
 		"LSSqlServermig_properties_typeProperties_userName": {
 			"value": "vbtest"
 		},
-		"LS_AZADLS_JSON_SRC_properties_typeProperties_url": {
-			"value": "https://adlsvbsrvraw.dfs.core.windows.net/"
+		"LS_AZADLS_JSONFLAT_METADATA_properties_typeProperties_url": {
+			"value": "https://adlsdevvisionboardraw01.dfs.core.windows.net/"
 		},
-		"LS_AZADLS_MIGRATION_SINK_properties_typeProperties_url": {
+		"LS_AZADLS_SFTP_properties_typeProperties_host": {
+			"value": "adlsdevvisionboardraw01.blob.core.windows.net"
+		},
+		"LS_AZADLS_SFTP_properties_typeProperties_userName": {
+			"value": "adlsdevvisionboardraw01.sftpuser"
+		},
+		"LS_AZADLS_SFTP_COPY_SRC_properties_typeProperties_host": {
+			"value": "adlsdevvisionboardraw01.blob.core.windows.net"
+		},
+		"LS_AZADLS_SFTP_COPY_SRC_properties_typeProperties_userName": {
+			"value": "adlsdevvisionboardraw01.sftpuser"
+		},
+		"LS_AZADLS_VBSRC_SINK_properties_typeProperties_url": {
 			"value": "https://adlsdevvbsrc01.dfs.core.windows.net/"
 		},
-		"LS_AZADLS_SFTP_SINK_properties_typeProperties_url": {
-			"value": "https://adlssftpsinkdev.dfs.core.windows.net"
+		"LS_AZADLS_VB_RAW_properties_typeProperties_url": {
+			"value": "https://adlsdevvisionboardraw01.dfs.core.windows.net/"
+		},
+		"LS_AZADLS_VB_SINK_properties_typeProperties_url": {
+			"value": "https://adlsdevvbsrc01.dfs.core.windows.net/"
 		},
 		"LS_AZBLOB_JSON_FLAT_SINK_properties_typeProperties_url": {
 			"value": "https://adlsvbsinkdev.dfs.core.windows.net/"

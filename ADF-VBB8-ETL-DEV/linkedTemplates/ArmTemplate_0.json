@@ -7,17 +7,29 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "ADF-VBB8-ETL-DEV"
 		},
-		"LS_AZADLS_JSON_SRC_accountKey": {
+		"LS_AZADLS_JSONFLAT_METADATA_accountKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_JSON_SRC'"
+			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_JSONFLAT_METADATA'"
 		},
-		"LS_AZADLS_MIGRATION_SINK_accountKey": {
+		"LS_AZADLS_SFTP_password": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_MIGRATION_SINK'"
+			"metadata": "Secure string for 'password' of 'LS_AZADLS_SFTP'"
 		},
-		"LS_AZADLS_SFTP_SINK_accountKey": {
+		"LS_AZADLS_SFTP_COPY_SRC_password": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_SFTP_SINK'"
+			"metadata": "Secure string for 'password' of 'LS_AZADLS_SFTP_COPY_SRC'"
+		},
+		"LS_AZADLS_VBSRC_SINK_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_VBSRC_SINK'"
+		},
+		"LS_AZADLS_VB_RAW_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_VB_RAW'"
+		},
+		"LS_AZADLS_VB_SINK_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_VB_SINK'"
 		},
 		"LS_AZBLOB_BULK_SRV_connectionString": {
 			"type": "secureString",
@@ -55,17 +67,37 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_SFTP_SINK'"
 		},
-		"LS_AZADLS_JSON_SRC_properties_typeProperties_url": {
+		"LS_AZADLS_JSONFLAT_METADATA_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://adlsvbsrvraw.dfs.core.windows.net/"
+			"defaultValue": "https://adlsdevvisionboardraw01.dfs.core.windows.net/"
 		},
-		"LS_AZADLS_MIGRATION_SINK_properties_typeProperties_url": {
+		"LS_AZADLS_SFTP_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "adlsdevvisionboardraw01.blob.core.windows.net"
+		},
+		"LS_AZADLS_SFTP_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "adlsdevvisionboardraw01.sftpuser"
+		},
+		"LS_AZADLS_SFTP_COPY_SRC_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "adlsdevvisionboardraw01.blob.core.windows.net"
+		},
+		"LS_AZADLS_SFTP_COPY_SRC_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "adlsdevvisionboardraw01.sftpuser"
+		},
+		"LS_AZADLS_VBSRC_SINK_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevvbsrc01.dfs.core.windows.net/"
 		},
-		"LS_AZADLS_SFTP_SINK_properties_typeProperties_url": {
+		"LS_AZADLS_VB_RAW_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://adlssftpsinkdev.dfs.core.windows.net"
+			"defaultValue": "https://adlsdevvisionboardraw01.dfs.core.windows.net/"
+		},
+		"LS_AZADLS_VB_SINK_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevvbsrc01.dfs.core.windows.net/"
 		},
 		"LS_AZBLOB_JSON_FLAT_SINK_properties_typeProperties_url": {
 			"type": "string",
@@ -137,51 +169,114 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/LS_AZADLS_JSON_SRC')]",
+			"name": "[concat(parameters('factoryName'), '/LS_AZADLS_JSONFLAT_METADATA')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "Getting Metadata Related details of Jason file in input folder of adlsdevvisionboardraw01",
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('LS_AZADLS_JSON_SRC_properties_typeProperties_url')]",
+					"url": "[parameters('LS_AZADLS_JSONFLAT_METADATA_properties_typeProperties_url')]",
 					"accountKey": {
 						"type": "SecureString",
-						"value": "[parameters('LS_AZADLS_JSON_SRC_accountKey')]"
+						"value": "[parameters('LS_AZADLS_JSONFLAT_METADATA_accountKey')]"
 					}
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/LS_AZADLS_MIGRATION_SINK')]",
+			"name": "[concat(parameters('factoryName'), '/LS_AZADLS_SFTP')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "LS_AZADLS_SFTP",
 				"annotations": [],
-				"type": "AzureBlobFS",
+				"type": "Sftp",
 				"typeProperties": {
-					"url": "[parameters('LS_AZADLS_MIGRATION_SINK_properties_typeProperties_url')]",
-					"accountKey": {
+					"host": "[parameters('LS_AZADLS_SFTP_properties_typeProperties_host')]",
+					"port": 22,
+					"skipHostKeyValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('LS_AZADLS_SFTP_properties_typeProperties_userName')]",
+					"password": {
 						"type": "SecureString",
-						"value": "[parameters('LS_AZADLS_MIGRATION_SINK_accountKey')]"
+						"value": "[parameters('LS_AZADLS_SFTP_password')]"
 					}
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/LS_AZADLS_SFTP_SINK')]",
+			"name": "[concat(parameters('factoryName'), '/LS_AZADLS_SFTP_COPY_SRC')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Sftp",
+				"typeProperties": {
+					"host": "[parameters('LS_AZADLS_SFTP_COPY_SRC_properties_typeProperties_host')]",
+					"port": 22,
+					"skipHostKeyValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('LS_AZADLS_SFTP_COPY_SRC_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LS_AZADLS_SFTP_COPY_SRC_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_AZADLS_VBSRC_SINK')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "SINK AZURE ADLS \"adlsdevvbsrc01\"",
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_AZADLS_VBSRC_SINK_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_AZADLS_VBSRC_SINK_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_AZADLS_VB_RAW')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('LS_AZADLS_SFTP_SINK_properties_typeProperties_url')]",
+					"url": "[parameters('LS_AZADLS_VB_RAW_properties_typeProperties_url')]",
 					"accountKey": {
 						"type": "SecureString",
-						"value": "[parameters('LS_AZADLS_SFTP_SINK_accountKey')]"
+						"value": "[parameters('LS_AZADLS_VB_RAW_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_AZADLS_VB_SINK')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "ADLS GEN 2 SINK",
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_AZADLS_VB_SINK_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_AZADLS_VB_SINK_accountKey')]"
 					}
 				}
 			},
@@ -387,172 +482,6 @@
 				"typeProperties": {}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_AZADLS_JASON_FLAT_META')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_AZADLS_JSON_SRC",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileSystem": "json"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"_id": {
-							"type": "string"
-						},
-						"index": {
-							"type": "integer"
-						},
-						"guid": {
-							"type": "string"
-						},
-						"isActive": {
-							"type": "boolean"
-						},
-						"balance": {
-							"type": "string"
-						},
-						"picture": {
-							"type": "string"
-						},
-						"age": {
-							"type": "integer"
-						},
-						"eyeColor": {
-							"type": "string"
-						},
-						"name": {
-							"type": "string"
-						},
-						"gender": {
-							"type": "string"
-						},
-						"company": {
-							"type": "string"
-						},
-						"email": {
-							"type": "string"
-						},
-						"phone": {
-							"type": "string"
-						},
-						"address": {
-							"type": "string"
-						},
-						"about": {
-							"type": "string"
-						},
-						"registered": {
-							"type": "string"
-						},
-						"latitude": {
-							"type": "number"
-						},
-						"longitude": {
-							"type": "number"
-						},
-						"tags": {
-							"type": "array",
-							"items": {
-								"type": "string"
-							}
-						},
-						"friends": {
-							"type": "array",
-							"items": {
-								"type": "object",
-								"properties": {
-									"id": {
-										"type": "integer"
-									},
-									"name": {
-										"type": "string"
-									}
-								}
-							}
-						},
-						"greeting": {
-							"type": "string"
-						},
-						"favoriteFruit": {
-							"type": "string"
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_AZADLS_JSON_SRC')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_AZBLOB_BULK_CHILD')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_AZBLOB_BULK_SRV",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"container": "rawdata"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_AZBLOB_BULK_SRV')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_AZBLOB_JSONSINK_CHILD')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_AZBLOB_CHID_JSONSINK",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"sinkfile": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": {
-							"value": "@dataset().sinkfile",
-							"type": "Expression"
-						},
-						"container": "json"
-					}
-				},
-				"schema": {}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_AZBLOB_CHID_JSONSINK')]"
-			]
 		}
 	]
 }
