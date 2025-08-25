@@ -2,14 +2,23 @@
 	"name": "DS_AZADLS_SFTP_RAW",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_AZADLS_SFTP",
+			"referenceName": "LS_AZADLS_SFTP_COPY_SRC",
 			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
 		},
 		"annotations": [],
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
-				"type": "SftpLocation"
+				"type": "SftpLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				}
 			}
 		}
 	}
