@@ -190,7 +190,13 @@
 				"inputs": [
 					{
 						"referenceName": "DS_AZADLS_SFTP_RAW_COPY",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": {
+								"value": "@variables('latestfile')",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
