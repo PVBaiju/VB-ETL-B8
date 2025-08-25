@@ -1,0 +1,30 @@
+{
+	"name": "DS_AZADLS_SFTP_RAW_COPY",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZADLS_SFTP_COPY_SRC",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

@@ -175,14 +175,14 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "BinarySource",
+						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "SftpReadSettings",
 							"recursive": true,
 							"disableChunking": false
 						},
 						"formatSettings": {
-							"type": "BinaryReadSettings"
+							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
@@ -195,14 +195,8 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_AZADLS_SFTP_RAW",
-						"type": "DatasetReference",
-						"parameters": {
-							"filename": {
-								"value": "@variables('latestfile')",
-								"type": "Expression"
-							}
-						}
+						"referenceName": "DS_AZADLS_SFTP_RAW_COPY",
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
