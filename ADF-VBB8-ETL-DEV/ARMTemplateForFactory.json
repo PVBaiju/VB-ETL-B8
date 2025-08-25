@@ -2143,7 +2143,8 @@
 						"fileName": {
 							"value": "@dataset().filename",
 							"type": "Expression"
-						}
+						},
+						"folderPath": "/sftp"
 					}
 				}
 			},
@@ -2268,7 +2269,8 @@
 						"fileName": {
 							"value": "@dataset().filename",
 							"type": "Expression"
-						}
+						},
+						"folderPath": "/sftp"
 					}
 				}
 			},
