@@ -5,12 +5,21 @@
 			"referenceName": "LS_AZADLS_MIGRATION_SINK",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"folder": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "orderpayment",
+				"folderPath": {
+					"value": "@dataset().folder",
+					"type": "Expression"
+				},
 				"fileSystem": "orderpayments"
 			},
 			"compressionCodec": "snappy"

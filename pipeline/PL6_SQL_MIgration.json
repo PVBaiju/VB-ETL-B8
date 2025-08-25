@@ -48,7 +48,13 @@
 				"outputs": [
 					{
 						"referenceName": "DS_AZSQLSRV_MIGRATION_PRQUT",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"folder": {
+								"value": "@concat(formatDateTime(utcNow(),'yyyy'),'/',formatDateTime(utcNow(),'MM'),'/',formatDateTime(utcNow(),'dd'),'/')",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
