@@ -1,0 +1,18 @@
+{
+	"name": "DS_AZADLS_JSON_VB_RAW",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZADLS_VB_RAW",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "input"
+			}
+		},
+		"schema": {}
+	}
+}

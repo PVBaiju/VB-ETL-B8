@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "DS_AZADLS_JSONFLAT_METADATA",
+						"referenceName": "DS_AZADLS_JSON_VB_RAW",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
