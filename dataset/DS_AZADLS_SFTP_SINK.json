@@ -1,12 +1,15 @@
 {
-	"name": "DS_AZADLS_SFTP_RAW",
+	"name": "DS_AZADLS_SFTP_SINK",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_AZADLS_SFTP",
+			"referenceName": "LS_AZADLS_VB_SINK",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
 			"filename": {
+				"type": "string"
+			},
+			"folder": {
 				"type": "string"
 			}
 		},
@@ -14,11 +17,16 @@
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
-				"type": "SftpLocation",
+				"type": "AzureBlobFSLocation",
 				"fileName": {
 					"value": "@dataset().filename",
 					"type": "Expression"
-				}
+				},
+				"folderPath": {
+					"value": "@dataset().folder",
+					"type": "Expression"
+				},
+				"fileSystem": "sftp"
 			}
 		}
 	}
