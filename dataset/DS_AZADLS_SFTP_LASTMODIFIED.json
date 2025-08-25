@@ -1,0 +1,25 @@
+{
+	"name": "DS_AZADLS_SFTP_LASTMODIFIED",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZADLS_SFTP",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				}
+			}
+		}
+	}
+}

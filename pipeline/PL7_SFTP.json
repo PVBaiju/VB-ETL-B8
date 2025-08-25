@@ -23,8 +23,9 @@
 						"childItems"
 					],
 					"storeSettings": {
-						"type": "AzureBlobFSReadSettings",
-						"enablePartitionDiscovery": false
+						"type": "SftpReadSettings",
+						"enablePartitionDiscovery": false,
+						"disableChunking": false
 					},
 					"formatSettings": {
 						"type": "BinaryReadSettings"
@@ -62,6 +63,16 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
+								"dataset": {
+									"referenceName": "DS_AZADLS_SFTP_LASTMODIFIED",
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
+								},
 								"fieldList": [
 									"lastModified",
 									"itemName"
