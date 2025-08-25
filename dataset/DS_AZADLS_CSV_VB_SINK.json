@@ -1,5 +1,5 @@
 {
-	"name": "DS_AZBLOB_JSON_FLAT_CSV_SINK",
+	"name": "DS_AZADLS_CSV_VB_SINK",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LS_AZADLS_VB_SINK",
@@ -19,7 +19,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@dataset().filename",
+					"value": "@concat(replace(dataset().filename,'.csv',''),'_',formatDateTime(utcNow(),'yyyy-MM-dd HH:mm:ss'),'.csv')",
 					"type": "Expression"
 				},
 				"folderPath": {

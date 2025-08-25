@@ -304,18 +304,25 @@
 							"inputs": [
 								{
 									"referenceName": "DS_AZADLS_JSON_VB_RAW",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [
 								{
-									"referenceName": "DS_AZBLOB_JSON_FLAT_CSV_SINK",
+									"referenceName": "DS_AZADLS_CSV_VB_SINK",
 									"type": "DatasetReference",
 									"parameters": {
-										"sinkfile": {
-											"value": "@concat(replace(item().name,'.json',''),'_',formatDateTime(utcNow(),'yyyy-MM-dd HH:mm:ss'),'.csv')",
+										"filename": {
+											"value": "@item().name",
 											"type": "Expression"
-										}
+										},
+										"folder": "@concat(formatDateTime(utcNow(),'yyyy'),'/',formatDateTime(utcNow(),'MM'),'/',formatDateTime(utcNow(),'dd'),'/')"
 									}
 								}
 							]
