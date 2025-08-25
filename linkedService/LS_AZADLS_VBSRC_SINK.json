@@ -1,0 +1,13 @@
+{
+	"name": "LS_AZADLS_VBSRC_SINK",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "SINK AZURE ADLS \"adlsdevvbsrc01\"",
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://adlsdevvbsrc01.dfs.core.windows.net/",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEQyNEZCODE1LUU0M0ItNDZFQi1BRjMyLTVGRTRBMkU0QTY0Nl9lYjE2NzZlZS0yOTE5LTQzZDktOWUzNi00YzFhMjJkNzk0MWIiDQp9"
+		}
+	}
+}
