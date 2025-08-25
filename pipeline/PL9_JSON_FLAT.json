@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "DS_AZADLS_JASON_FLAT_META",
+						"referenceName": "DS_AZADLS_JSONFLAT_METADATA",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
@@ -24,7 +24,6 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
-						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -304,14 +303,8 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "DS_AZBLOB_JSON_FLAT_SRC",
-									"type": "DatasetReference",
-									"parameters": {
-										"srcfile": {
-											"value": "@item().name",
-											"type": "Expression"
-										}
-									}
+									"referenceName": "DS_AZADLS_COPY_JSONFLAT_RAW",
+									"type": "DatasetReference"
 								}
 							],
 							"outputs": [

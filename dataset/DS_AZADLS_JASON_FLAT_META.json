@@ -1,10 +1,6 @@
 {
 	"name": "DS_AZADLS_JASON_FLAT_META",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "LS_AZADLS_JSON_SRC",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {

@@ -1,10 +1,6 @@
 {
 	"name": "DS_SINK_SFTP_DYNA",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "LS_AZADLS_SFTP_SINK",
-			"type": "LinkedServiceReference"
-		},
 		"parameters": {
 			"filename": {
 				"type": "string"

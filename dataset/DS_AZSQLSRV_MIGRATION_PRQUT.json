@@ -2,7 +2,7 @@
 	"name": "DS_AZSQLSRV_MIGRATION_PRQUT",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_AZADLS_MIGRATION_SINK",
+			"referenceName": "LS_AZADLS_VBSRC_SINK",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
