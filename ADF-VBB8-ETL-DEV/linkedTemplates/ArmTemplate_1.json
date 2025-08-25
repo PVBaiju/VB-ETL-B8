@@ -128,11 +128,20 @@
 					"referenceName": "LS_AZADLS_SFTP",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "Binary",
 				"typeProperties": {
 					"location": {
-						"type": "SftpLocation"
+						"type": "SftpLocation",
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						}
 					}
 				}
 			},
@@ -151,7 +160,8 @@
 				"type": "Binary",
 				"typeProperties": {
 					"location": {
-						"type": "SftpLocation"
+						"type": "SftpLocation",
+						"folderPath": "/sftp"
 					}
 				}
 			},

@@ -660,7 +660,12 @@
 										"dataset": {
 											"referenceName": "DS_AZADLS_SFTP_LASTMODIFIED",
 											"type": "DatasetReference",
-											"parameters": {}
+											"parameters": {
+												"filename": {
+													"value": "@item().name",
+													"type": "Expression"
+												}
+											}
 										},
 										"fieldList": [
 											"lastModified",
