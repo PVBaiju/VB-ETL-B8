@@ -16,17 +16,15 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "DS_GET_SFTP_VALUES",
+						"referenceName": "DS_AZADLS_SFTP_RAW",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
 						"childItems"
 					],
 					"storeSettings": {
-						"type": "SftpReadSettings",
-						"recursive": true,
-						"enablePartitionDiscovery": false,
-						"disableChunking": false
+						"type": "AzureBlobFSReadSettings",
+						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
 						"type": "BinaryReadSettings"
@@ -64,16 +62,6 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"dataset": {
-									"referenceName": "DS_SFTP_DYNA",
-									"type": "DatasetReference",
-									"parameters": {
-										"filename": {
-											"value": "@item().name",
-											"type": "Expression"
-										}
-									}
-								},
 								"fieldList": [
 									"lastModified",
 									"itemName"
@@ -185,26 +173,8 @@
 							"type": "BinaryReadSettings"
 						}
 					},
-					"sink": {
-						"type": "BinarySink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						}
-					},
 					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "DS_SFTP_DYNA",
-						"type": "DatasetReference",
-						"parameters": {
-							"filename": {
-								"value": "@variables('latestfile')",
-								"type": "Expression"
-							}
-						}
-					}
-				]
+				}
 			}
 		],
 		"parameters": {
