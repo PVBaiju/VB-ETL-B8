@@ -54,7 +54,7 @@
 								"value": "@concat(formatDateTime(utcNow(),'yyyy'),'/',formatDateTime(utcNow(),'MM'),'/',formatDateTime(utcNow(),'dd'),'/')",
 								"type": "Expression"
 							},
-							"filename": "orderpayment"
+							"filename": "sqldb"
 						}
 					}
 				]
