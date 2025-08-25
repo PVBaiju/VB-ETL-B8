@@ -66,13 +66,7 @@
 							"typeProperties": {
 								"dataset": {
 									"referenceName": "DS_AZADLS_SFTP_LASTMODIFIED",
-									"type": "DatasetReference",
-									"parameters": {
-										"filename": {
-											"value": "@item().name",
-											"type": "Expression"
-										}
-									}
+									"type": "DatasetReference"
 								},
 								"fieldList": [
 									"lastModified",
