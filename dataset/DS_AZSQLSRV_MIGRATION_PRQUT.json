@@ -2,7 +2,7 @@
 	"name": "DS_AZSQLSRV_MIGRATION_PRQUT",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_SQL_RAW_PARQUT",
+			"referenceName": "LS_AZADLS_MIGRATION_SINK",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
