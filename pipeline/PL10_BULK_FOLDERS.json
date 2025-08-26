@@ -202,7 +202,7 @@
 								"source": {
 									"type": "JsonSource",
 									"storeSettings": {
-										"type": "AzureBlobStorageReadSettings",
+										"type": "AzureBlobFSReadSettings",
 										"recursive": true,
 										"enablePartitionDiscovery": false
 									},
@@ -223,10 +223,10 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "DS_AZBLOB_JSONSRV_CHILD",
+									"referenceName": "DS_AZADLS_BULKCOPY_JSON_SRC",
 									"type": "DatasetReference",
 									"parameters": {
-										"sourcefile": {
+										"filename": {
 											"value": "@item().name",
 											"type": "Expression"
 										}
