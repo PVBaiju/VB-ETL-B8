@@ -213,7 +213,7 @@
 								"sink": {
 									"type": "JsonSink",
 									"storeSettings": {
-										"type": "AzureBlobStorageWriteSettings"
+										"type": "AzureBlobFSWriteSettings"
 									},
 									"formatSettings": {
 										"type": "JsonWriteSettings"
@@ -235,13 +235,10 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "DS_AZBLOB_JSONSINK_CHILD",
+									"referenceName": "DS_AZADLS_BULKCOPY_JSON_SINK",
 									"type": "DatasetReference",
 									"parameters": {
-										"sinkfile": {
-											"value": "@concat(replace(item().name,'.json',''),'_',formatDateTime(utcNow(),'yyyy-MM-dd HH:mm:ss'),'.json')\n\n",
-											"type": "Expression"
-										}
+										"filename": "@concat(replace(item().name,'.json',''),'_',formatDateTime(utcNow(),'yyyy-MM-dd HH:mm:ss'),'.json')"
 									}
 								}
 							]

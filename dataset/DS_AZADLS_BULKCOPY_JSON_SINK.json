@@ -1,0 +1,28 @@
+{
+	"name": "DS_AZADLS_BULKCOPY_JSON_SINK",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZADLS_VB_SINK",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"folderPath": "json",
+				"fileSystem": "bulk"
+			}
+		},
+		"schema": {}
+	}
+}
