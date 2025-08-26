@@ -2,7 +2,7 @@
 	"name": "DS_AZADLS_JSON_VB_RAW",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_AZADLS_VB_RAW",
+			"referenceName": "LS_AZADLS_VB_RAW001",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
