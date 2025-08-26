@@ -13,6 +13,604 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/PL7_SFTP')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "GET_CHILD_METADATA",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "DS_AZADLS_SFTP_RAW",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "SftpReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false,
+								"disableChunking": false
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					},
+					{
+						"name": "ForEachFiles",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "GET_CHILD_METADATA",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('GET_CHILD_METADATA').output.childItems",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Getlastmod",
+									"type": "GetMetadata",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"dataset": {
+											"referenceName": "DS_AZADLS_SFTP_LASTMODIFIED",
+											"type": "DatasetReference",
+											"parameters": {
+												"filename": {
+													"value": "@item().name",
+													"type": "Expression"
+												}
+											}
+										},
+										"fieldList": [
+											"lastModified",
+											"itemName"
+										],
+										"storeSettings": {
+											"type": "SftpReadSettings",
+											"recursive": true,
+											"enablePartitionDiscovery": false,
+											"disableChunking": false
+										},
+										"formatSettings": {
+											"type": "BinaryReadSettings"
+										}
+									}
+								},
+								{
+									"name": "If Condition1",
+									"type": "IfCondition",
+									"dependsOn": [
+										{
+											"activity": "Getlastmod",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@greater(activity('Getlastmod').output.lastModified,variables('Refdatetime'))\n\n",
+											"type": "Expression"
+										},
+										"ifTrueActivities": [
+											{
+												"name": "Set variable1",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"policy": {
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "Refdatetime",
+													"value": {
+														"value": "@activity('Getlastmod').output.lastModified",
+														"type": "Expression"
+													}
+												}
+											},
+											{
+												"name": "Set variable2",
+												"type": "SetVariable",
+												"dependsOn": [
+													{
+														"activity": "Set variable1",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "latestfile",
+													"value": {
+														"value": "@activity('Getlastmod').output.itemName",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "COPY DYNA SFTP",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "ForEachFiles",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "SftpReadSettings",
+									"recursive": true,
+									"disableChunking": false
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_AZADLS_SFTP_SRC",
+								"type": "DatasetReference",
+								"parameters": {
+									"filename": {
+										"value": "@variables('latestfile')",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_AZADLS_SFTP_SINK",
+								"type": "DatasetReference",
+								"parameters": {
+									"filename": {
+										"value": "@variables('latestfile')",
+										"type": "Expression"
+									},
+									"folder": {
+										"value": "@concat(formatDateTime(utcNow(),'yyyy'),'/',formatDateTime(utcNow(),'MM'),'/',formatDateTime(utcNow(),'dd'),'/')",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"Trigger": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"latestfile": {
+						"type": "String"
+					},
+					"Refdatetime": {
+						"type": "String",
+						"defaultValue": "1800-01-01 00:00:00"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL9_JSON_FLAT')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "GET_JSON_META",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "DS_AZADLS_JSON_VB_META",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "JsonReadSettings"
+							}
+						}
+					},
+					{
+						"name": "Filter_JSON",
+						"type": "Filter",
+						"dependsOn": [
+							{
+								"activity": "GET_JSON_META",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('GET_JSON_META').output.childItems",
+								"type": "Expression"
+							},
+							"condition": {
+								"value": "@endswith(item().name,'.json' )",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Filter_JSON",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Filter_JSON').output.value",
+								"type": "Expression"
+							},
+							"isSequential": true,
+							"activities": [
+								{
+									"name": "COPY JSON FLAT CSV",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "JsonSource",
+											"storeSettings": {
+												"type": "AzureBlobFSReadSettings",
+												"recursive": true,
+												"enablePartitionDiscovery": false
+											},
+											"formatSettings": {
+												"type": "JsonReadSettings"
+											}
+										},
+										"sink": {
+											"type": "DelimitedTextSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "DelimitedTextWriteSettings",
+												"quoteAllText": true,
+												"fileExtension": ".txt"
+											}
+										},
+										"enableStaging": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"mappings": [
+												{
+													"source": {
+														"path": "$['_id']"
+													},
+													"sink": {
+														"name": "_id"
+													}
+												},
+												{
+													"source": {
+														"path": "$['index']"
+													},
+													"sink": {
+														"name": "index"
+													}
+												},
+												{
+													"source": {
+														"path": "$['guid']"
+													},
+													"sink": {
+														"name": "guid"
+													}
+												},
+												{
+													"source": {
+														"path": "$['isActive']"
+													},
+													"sink": {
+														"name": "isActive"
+													}
+												},
+												{
+													"source": {
+														"path": "$['balance']"
+													},
+													"sink": {
+														"name": "balance"
+													}
+												},
+												{
+													"source": {
+														"path": "$['picture']"
+													},
+													"sink": {
+														"name": "picture"
+													}
+												},
+												{
+													"source": {
+														"path": "$['age']"
+													},
+													"sink": {
+														"name": "age"
+													}
+												},
+												{
+													"source": {
+														"path": "$['eyeColor']"
+													},
+													"sink": {
+														"name": "eyeColor"
+													}
+												},
+												{
+													"source": {
+														"path": "$['name']"
+													},
+													"sink": {
+														"name": "name"
+													}
+												},
+												{
+													"source": {
+														"path": "$['gender']"
+													},
+													"sink": {
+														"name": "gender"
+													}
+												},
+												{
+													"source": {
+														"path": "$['company']"
+													},
+													"sink": {
+														"name": "company"
+													}
+												},
+												{
+													"source": {
+														"path": "$['email']"
+													},
+													"sink": {
+														"name": "email"
+													}
+												},
+												{
+													"source": {
+														"path": "$['phone']"
+													},
+													"sink": {
+														"name": "phone"
+													}
+												},
+												{
+													"source": {
+														"path": "$['address']"
+													},
+													"sink": {
+														"name": "address"
+													}
+												},
+												{
+													"source": {
+														"path": "$['about']"
+													},
+													"sink": {
+														"name": "about"
+													}
+												},
+												{
+													"source": {
+														"path": "$['registered']"
+													},
+													"sink": {
+														"name": "registered"
+													}
+												},
+												{
+													"source": {
+														"path": "$['latitude']"
+													},
+													"sink": {
+														"name": "latitude"
+													}
+												},
+												{
+													"source": {
+														"path": "$['longitude']"
+													},
+													"sink": {
+														"name": "longitude"
+													}
+												},
+												{
+													"source": {
+														"path": "$['tags'][0]"
+													},
+													"sink": {
+														"name": "items"
+													}
+												},
+												{
+													"source": {
+														"path": "[['id']"
+													},
+													"sink": {
+														"name": "id"
+													}
+												},
+												{
+													"source": {
+														"path": "[['name']"
+													},
+													"sink": {
+														"name": "friends'][0]['name"
+													}
+												},
+												{
+													"source": {
+														"path": "$['greeting']"
+													},
+													"sink": {
+														"name": "greeting"
+													}
+												},
+												{
+													"source": {
+														"path": "$['favoriteFruit']"
+													},
+													"sink": {
+														"name": "favoriteFruit"
+													}
+												}
+											],
+											"collectionReference": "$['friends']",
+											"mapComplexValuesToString": false
+										}
+									},
+									"inputs": [
+										{
+											"referenceName": "DS_AZADLS_JSON_VB_RAW",
+											"type": "DatasetReference",
+											"parameters": {
+												"filename": {
+													"value": "@item().name",
+													"type": "Expression"
+												}
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "DS_AZADLS_CSV_VB_SINK",
+											"type": "DatasetReference",
+											"parameters": {
+												"filename": {
+													"value": "@item().name",
+													"type": "Expression"
+												},
+												"folder": "@concat(formatDateTime(utcNow(),'yyyy'),'/',formatDateTime(utcNow(),'MM'),'/',formatDateTime(utcNow(),'dd'),'/')"
+											}
+										}
+									]
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"Trigger": {
+						"type": "string"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DS_AZSQLSRV_MIGRATION_SRC')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -630,7 +1228,9 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL3_CLOUDSG_CSV_EXCEL')]",
-				"[concat(variables('factoryId'), '/pipelines/PL6_SQL_MIgration')]"
+				"[concat(variables('factoryId'), '/pipelines/PL6_SQL_MIgration')]",
+				"[concat(variables('factoryId'), '/pipelines/PL7_SFTP')]",
+				"[concat(variables('factoryId'), '/pipelines/PL9_JSON_FLAT')]"
 			]
 		},
 		{

@@ -103,6 +103,10 @@
 			"type": "string",
 			"defaultValue": "@{linkedService().storage_account_loc}"
 		},
+		"LS_AZADLS_VB_EXCEL_CLOUD_COPY_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().storage_account_loc}"
+		},
 		"LS_AZADLS_VB_RAW001_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevvisionboardraw01.dfs.core.windows.net/"
@@ -213,6 +217,9 @@
 					},
 					"LS_AZADLS_VB_CLOUD_RAW_properties_typeProperties_url": {
 						"value": "[parameters('LS_AZADLS_VB_CLOUD_RAW_properties_typeProperties_url')]"
+					},
+					"LS_AZADLS_VB_EXCEL_CLOUD_COPY_properties_typeProperties_url": {
+						"value": "[parameters('LS_AZADLS_VB_EXCEL_CLOUD_COPY_properties_typeProperties_url')]"
 					},
 					"LS_AZADLS_VB_RAW001_properties_typeProperties_url": {
 						"value": "[parameters('LS_AZADLS_VB_RAW001_properties_typeProperties_url')]"
