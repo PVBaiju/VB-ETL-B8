@@ -589,7 +589,10 @@
 													"value": "@item().name",
 													"type": "Expression"
 												},
-												"folder": "@concat(formatDateTime(utcNow(),'yyyy'),'/',formatDateTime(utcNow(),'MM'),'/',formatDateTime(utcNow(),'dd'),'/')"
+												"folder": {
+													"value": "@concat(\n    'json/',\n    formatDateTime(utcNow(), 'yyyy'), '/',\n    formatDateTime(utcNow(), 'MM'), '/',\n    formatDateTime(utcNow(), 'dd')\n)\n",
+													"type": "Expression"
+												}
 											}
 										}
 									]

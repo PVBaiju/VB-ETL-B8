@@ -65,6 +65,9 @@
 				"parameters": {
 					"filename": {
 						"type": "string"
+					},
+					"folder": {
+						"type": "string"
 					}
 				},
 				"annotations": [],
@@ -76,8 +79,11 @@
 							"value": "@dataset().filename",
 							"type": "Expression"
 						},
-						"folderPath": "csv",
-						"fileSystem": "bulk"
+						"folderPath": {
+							"value": "@dataset().folder",
+							"type": "Expression"
+						},
+						"fileSystem": "output"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -191,7 +197,7 @@
 							"value": "@dataset().folder",
 							"type": "Expression"
 						},
-						"fileSystem": "json"
+						"fileSystem": "output"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -730,7 +736,11 @@
 											"referenceName": "DS_AZADLS_COPY_CSV_SINK",
 											"type": "DatasetReference",
 											"parameters": {
-												"filename": "@concat(replace(item().name,'.csv',''),'_',formatDateTime(utcNow(),'yyyy-MM-dd HH:mm:ss'),'.csv')"
+												"filename": "@concat(replace(item().name,'.csv',''),'_',formatDateTime(utcNow(),'yyyy-MM-dd HH:mm:ss'),'.csv')",
+												"folder": {
+													"value": "@concat(\n    'csv/',\n    formatDateTime(utcNow(), 'yyyy'), '/',\n    formatDateTime(utcNow(), 'MM'), '/',\n    formatDateTime(utcNow(), 'dd')\n)\n",
+													"type": "Expression"
+												}
 											}
 										}
 									]
@@ -809,7 +819,11 @@
 											"referenceName": "DS_AZADLS_BULKCOPY_JSON_SINK",
 											"type": "DatasetReference",
 											"parameters": {
-												"filename": "@concat(replace(item().name,'.json',''),'_',formatDateTime(utcNow(),'yyyy-MM-dd HH:mm:ss'),'.json')"
+												"filename": "@concat(replace(item().name,'.json',''),'_',formatDateTime(utcNow(),'yyyy-MM-dd HH:mm:ss'),'.json')",
+												"folder": {
+													"value": "@concat(\n    'json/',\n    formatDateTime(utcNow(), 'yyyy'), '/',\n    formatDateTime(utcNow(), 'MM'), '/',\n    formatDateTime(utcNow(), 'dd')\n)\n",
+													"type": "Expression"
+												}
 											}
 										}
 									]

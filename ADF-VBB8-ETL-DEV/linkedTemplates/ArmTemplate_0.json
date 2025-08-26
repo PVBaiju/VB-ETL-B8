@@ -413,6 +413,9 @@
 				"parameters": {
 					"filename": {
 						"type": "string"
+					},
+					"folder": {
+						"type": "string"
 					}
 				},
 				"annotations": [],
@@ -424,8 +427,11 @@
 							"value": "@dataset().filename",
 							"type": "Expression"
 						},
-						"folderPath": "json",
-						"fileSystem": "bulk"
+						"folderPath": {
+							"value": "@dataset().folder",
+							"type": "Expression"
+						},
+						"fileSystem": "ouput"
 					}
 				},
 				"schema": {}
