@@ -139,52 +139,8 @@
 							"type": "ParquetWriteSettings"
 						}
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "DS_AZBLOB_SRV_CSV",
-						"type": "DatasetReference",
-						"parameters": {
-							"blob_storage_acc_loc": {
-								"value": "@activity('LKUP_JOB_DETAILS').output.firstRow.sourcedata",
-								"type": "Expression"
-							},
-							"column_delimiter": {
-								"value": "@activity('LKUP_JOB_DETAILS').output.firstRow.delimter",
-								"type": "Expression"
-							},
-							"file": {
-								"value": "@activity('LKUP_JOB_DETAILS').output.firstRow.sourcefile",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "DS_AZBLOB_SINK_PRQT",
-						"type": "DatasetReference",
-						"parameters": {
-							"adls_storage_acc_loc": {
-								"value": "@activity('LKUP_JOB_DETAILS').output.firstRow.targetdata",
-								"type": "Expression"
-							},
-							"directory": {
-								"value": "@activity('LKUP_JOB_DETAILS').output.firstRow.targetdirectory",
-								"type": "Expression"
-							}
-						}
-					}
-				]
+					"enableStaging": false
+				}
 			},
 			{
 				"name": "SP-SUCESS-LOG-ENTRY",
