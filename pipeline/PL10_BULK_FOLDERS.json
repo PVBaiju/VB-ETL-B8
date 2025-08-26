@@ -113,7 +113,7 @@
 								"source": {
 									"type": "DelimitedTextSource",
 									"storeSettings": {
-										"type": "AzureBlobStorageReadSettings",
+										"type": "AzureBlobFSReadSettings",
 										"recursive": true,
 										"enablePartitionDiscovery": false
 									},
@@ -147,7 +147,7 @@
 									"referenceName": "DS_AZBLOB_SRV_CHILD",
 									"type": "DatasetReference",
 									"parameters": {
-										"sourcefile": {
+										"filename": {
 											"value": "@item().name",
 											"type": "Expression"
 										}

@@ -2,11 +2,11 @@
 	"name": "DS_AZBLOB_SRV_CHILD",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_AZBLOB_CHILD",
+			"referenceName": "LS_AZADLS_VB_RAW",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"sourcefile": {
+			"filename": {
 				"type": "string"
 			}
 		},
@@ -14,12 +14,12 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation",
+				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@dataset().sourcefile",
+					"value": "@dataset().filename",
 					"type": "Expression"
 				},
-				"container": "rawdata"
+				"fileSystem": "input"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
