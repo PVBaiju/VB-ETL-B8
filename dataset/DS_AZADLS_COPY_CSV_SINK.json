@@ -8,6 +8,9 @@
 		"parameters": {
 			"filename": {
 				"type": "string"
+			},
+			"folder": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
@@ -19,8 +22,11 @@
 					"value": "@dataset().filename",
 					"type": "Expression"
 				},
-				"folderPath": "csv",
-				"fileSystem": "bulk"
+				"folderPath": {
+					"value": "@dataset().folder",
+					"type": "Expression"
+				},
+				"fileSystem": "output"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

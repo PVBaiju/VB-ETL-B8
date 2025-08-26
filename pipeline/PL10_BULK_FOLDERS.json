@@ -159,7 +159,11 @@
 									"referenceName": "DS_AZADLS_COPY_CSV_SINK",
 									"type": "DatasetReference",
 									"parameters": {
-										"filename": "@concat(replace(item().name,'.csv',''),'_',formatDateTime(utcNow(),'yyyy-MM-dd HH:mm:ss'),'.csv')"
+										"filename": "@concat(replace(item().name,'.csv',''),'_',formatDateTime(utcNow(),'yyyy-MM-dd HH:mm:ss'),'.csv')",
+										"folder": {
+											"value": "@concat(\n    'csv/',\n    formatDateTime(utcNow(), 'yyyy'), '/',\n    formatDateTime(utcNow(), 'MM'), '/',\n    formatDateTime(utcNow(), 'dd')\n)\n",
+											"type": "Expression"
+										}
 									}
 								}
 							]
@@ -238,7 +242,11 @@
 									"referenceName": "DS_AZADLS_BULKCOPY_JSON_SINK",
 									"type": "DatasetReference",
 									"parameters": {
-										"filename": "@concat(replace(item().name,'.json',''),'_',formatDateTime(utcNow(),'yyyy-MM-dd HH:mm:ss'),'.json')"
+										"filename": "@concat(replace(item().name,'.json',''),'_',formatDateTime(utcNow(),'yyyy-MM-dd HH:mm:ss'),'.json')",
+										"folder": {
+											"value": "@concat(\n    'json/',\n    formatDateTime(utcNow(), 'yyyy'), '/',\n    formatDateTime(utcNow(), 'MM'), '/',\n    formatDateTime(utcNow(), 'dd')\n)\n",
+											"type": "Expression"
+										}
 									}
 								}
 							]
