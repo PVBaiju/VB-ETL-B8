@@ -20,7 +20,7 @@
 		"LS_AZADLS_VBSRC_SINK_accountKey": {
 			"value": ""
 		},
-		"LS_AZADLS_VB_RAW_accountKey": {
+		"LS_AZADLS_VB_RAW001_accountKey": {
 			"value": ""
 		},
 		"LS_AZADLS_VB_SINK_accountKey": {
@@ -38,19 +38,10 @@
 		"LS_AZBLOB_CHID_SINK_connectionString": {
 			"value": ""
 		},
-		"LS_AZBLOB_CHID_SRV_connectionString": {
-			"value": ""
-		},
 		"LS_AZBLOB_CHILD_connectionString": {
 			"value": ""
 		},
-		"LS_AZBLOB_JSON_FLAT_SINK_accountKey": {
-			"value": ""
-		},
 		"LS_AZSQLDB_METADATA_password": {
-			"value": ""
-		},
-		"LS_SFTP_SINK_password": {
 			"value": ""
 		},
 		"LSSqlServermig_properties_typeProperties_server": {
@@ -80,20 +71,17 @@
 		"LS_AZADLS_VBSRC_SINK_properties_typeProperties_url": {
 			"value": "https://adlsdevvbsrc01.dfs.core.windows.net/"
 		},
-		"LS_AZADLS_VB_RAW_properties_typeProperties_url": {
+		"LS_AZADLS_VB_CLOUD_CSV_SINK_properties_typeProperties_url": {
+			"value": "@{linkedService().storage_account_loc}"
+		},
+		"LS_AZADLS_VB_CLOUD_RAW_properties_typeProperties_url": {
+			"value": "@{linkedService().storage_account_loc}"
+		},
+		"LS_AZADLS_VB_RAW001_properties_typeProperties_url": {
 			"value": "https://adlsdevvisionboardraw01.dfs.core.windows.net/"
 		},
 		"LS_AZADLS_VB_SINK_properties_typeProperties_url": {
 			"value": "https://adlsdevvbsrc01.dfs.core.windows.net/"
-		},
-		"LS_AZBLOB_JSON_FLAT_SINK_properties_typeProperties_url": {
-			"value": "https://adlsvbsinkdev.dfs.core.windows.net/"
-		},
-		"LS_AZBLOB_SINK_PRQT_properties_typeProperties_url": {
-			"value": "@{linkedService().adls_storage_acc_loc}"
-		},
-		"LS_AZBLOB_SRV_CSV_properties_typeProperties_serviceEndpoint": {
-			"value": "@{linkedService().storage_acc_loc}"
 		},
 		"LS_AZSQLDB_METADATA_properties_typeProperties_server": {
 			"value": "sql-srvr-vb-dev.database.windows.net"
@@ -106,12 +94,6 @@
 		},
 		"LS_RESTAPI_SRC_properties_typeProperties_url": {
 			"value": "https://retool.com/utilities/generate-api-from-csv"
-		},
-		"LS_SFTP_SINK_properties_typeProperties_host": {
-			"value": "adlssftpsinkdev.blob.core.windows.net"
-		},
-		"LS_SFTP_SINK_properties_typeProperties_userName": {
-			"value": "adlssftpsinkdev.sftpsink"
 		},
 		"containerUri": {
 			"value": ""

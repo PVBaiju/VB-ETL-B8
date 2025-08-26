@@ -27,9 +27,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_VBSRC_SINK'"
 		},
-		"LS_AZADLS_VB_RAW_accountKey": {
+		"LS_AZADLS_VB_RAW001_accountKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_VB_RAW'"
+			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_VB_RAW001'"
 		},
 		"LS_AZADLS_VB_SINK_accountKey": {
 			"type": "secureString",
@@ -51,25 +51,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'LS_AZBLOB_CHID_SINK'"
 		},
-		"LS_AZBLOB_CHID_SRV_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'LS_AZBLOB_CHID_SRV'"
-		},
 		"LS_AZBLOB_CHILD_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'LS_AZBLOB_CHILD'"
 		},
-		"LS_AZBLOB_JSON_FLAT_SINK_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'LS_AZBLOB_JSON_FLAT_SINK'"
-		},
 		"LS_AZSQLDB_METADATA_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_AZSQLDB_METADATA'"
-		},
-		"LS_SFTP_SINK_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'LS_SFTP_SINK'"
 		},
 		"LSSqlServermig_properties_typeProperties_server": {
 			"type": "string",
@@ -107,25 +95,21 @@
 			"type": "string",
 			"defaultValue": "https://adlsdevvbsrc01.dfs.core.windows.net/"
 		},
-		"LS_AZADLS_VB_RAW_properties_typeProperties_url": {
+		"LS_AZADLS_VB_CLOUD_CSV_SINK_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().storage_account_loc}"
+		},
+		"LS_AZADLS_VB_CLOUD_RAW_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().storage_account_loc}"
+		},
+		"LS_AZADLS_VB_RAW001_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevvisionboardraw01.dfs.core.windows.net/"
 		},
 		"LS_AZADLS_VB_SINK_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevvbsrc01.dfs.core.windows.net/"
-		},
-		"LS_AZBLOB_JSON_FLAT_SINK_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://adlsvbsinkdev.dfs.core.windows.net/"
-		},
-		"LS_AZBLOB_SINK_PRQT_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "@{linkedService().adls_storage_acc_loc}"
-		},
-		"LS_AZBLOB_SRV_CSV_properties_typeProperties_serviceEndpoint": {
-			"type": "string",
-			"defaultValue": "@{linkedService().storage_acc_loc}"
 		},
 		"LS_AZSQLDB_METADATA_properties_typeProperties_server": {
 			"type": "string",
@@ -142,14 +126,6 @@
 		"LS_RESTAPI_SRC_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://retool.com/utilities/generate-api-from-csv"
-		},
-		"LS_SFTP_SINK_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "adlssftpsinkdev.blob.core.windows.net"
-		},
-		"LS_SFTP_SINK_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "adlssftpsinkdev.sftpsink"
 		},
 		"containerUri": {
 			"type": "string",
@@ -190,8 +166,8 @@
 					"LS_AZADLS_VBSRC_SINK_accountKey": {
 						"value": "[parameters('LS_AZADLS_VBSRC_SINK_accountKey')]"
 					},
-					"LS_AZADLS_VB_RAW_accountKey": {
-						"value": "[parameters('LS_AZADLS_VB_RAW_accountKey')]"
+					"LS_AZADLS_VB_RAW001_accountKey": {
+						"value": "[parameters('LS_AZADLS_VB_RAW001_accountKey')]"
 					},
 					"LS_AZADLS_VB_SINK_accountKey": {
 						"value": "[parameters('LS_AZADLS_VB_SINK_accountKey')]"
@@ -208,20 +184,11 @@
 					"LS_AZBLOB_CHID_SINK_connectionString": {
 						"value": "[parameters('LS_AZBLOB_CHID_SINK_connectionString')]"
 					},
-					"LS_AZBLOB_CHID_SRV_connectionString": {
-						"value": "[parameters('LS_AZBLOB_CHID_SRV_connectionString')]"
-					},
 					"LS_AZBLOB_CHILD_connectionString": {
 						"value": "[parameters('LS_AZBLOB_CHILD_connectionString')]"
 					},
-					"LS_AZBLOB_JSON_FLAT_SINK_accountKey": {
-						"value": "[parameters('LS_AZBLOB_JSON_FLAT_SINK_accountKey')]"
-					},
 					"LS_AZSQLDB_METADATA_password": {
 						"value": "[parameters('LS_AZSQLDB_METADATA_password')]"
-					},
-					"LS_SFTP_SINK_password": {
-						"value": "[parameters('LS_SFTP_SINK_password')]"
 					},
 					"LS_AZADLS_JSONFLAT_METADATA_properties_typeProperties_url": {
 						"value": "[parameters('LS_AZADLS_JSONFLAT_METADATA_properties_typeProperties_url')]"
@@ -241,20 +208,17 @@
 					"LS_AZADLS_VBSRC_SINK_properties_typeProperties_url": {
 						"value": "[parameters('LS_AZADLS_VBSRC_SINK_properties_typeProperties_url')]"
 					},
-					"LS_AZADLS_VB_RAW_properties_typeProperties_url": {
-						"value": "[parameters('LS_AZADLS_VB_RAW_properties_typeProperties_url')]"
+					"LS_AZADLS_VB_CLOUD_CSV_SINK_properties_typeProperties_url": {
+						"value": "[parameters('LS_AZADLS_VB_CLOUD_CSV_SINK_properties_typeProperties_url')]"
+					},
+					"LS_AZADLS_VB_CLOUD_RAW_properties_typeProperties_url": {
+						"value": "[parameters('LS_AZADLS_VB_CLOUD_RAW_properties_typeProperties_url')]"
+					},
+					"LS_AZADLS_VB_RAW001_properties_typeProperties_url": {
+						"value": "[parameters('LS_AZADLS_VB_RAW001_properties_typeProperties_url')]"
 					},
 					"LS_AZADLS_VB_SINK_properties_typeProperties_url": {
 						"value": "[parameters('LS_AZADLS_VB_SINK_properties_typeProperties_url')]"
-					},
-					"LS_AZBLOB_JSON_FLAT_SINK_properties_typeProperties_url": {
-						"value": "[parameters('LS_AZBLOB_JSON_FLAT_SINK_properties_typeProperties_url')]"
-					},
-					"LS_AZBLOB_SINK_PRQT_properties_typeProperties_url": {
-						"value": "[parameters('LS_AZBLOB_SINK_PRQT_properties_typeProperties_url')]"
-					},
-					"LS_AZBLOB_SRV_CSV_properties_typeProperties_serviceEndpoint": {
-						"value": "[parameters('LS_AZBLOB_SRV_CSV_properties_typeProperties_serviceEndpoint')]"
 					},
 					"LS_AZSQLDB_METADATA_properties_typeProperties_server": {
 						"value": "[parameters('LS_AZSQLDB_METADATA_properties_typeProperties_server')]"
@@ -267,12 +231,6 @@
 					},
 					"LS_RESTAPI_SRC_properties_typeProperties_url": {
 						"value": "[parameters('LS_RESTAPI_SRC_properties_typeProperties_url')]"
-					},
-					"LS_SFTP_SINK_properties_typeProperties_host": {
-						"value": "[parameters('LS_SFTP_SINK_properties_typeProperties_host')]"
-					},
-					"LS_SFTP_SINK_properties_typeProperties_userName": {
-						"value": "[parameters('LS_SFTP_SINK_properties_typeProperties_userName')]"
 					}
 				}
 			},

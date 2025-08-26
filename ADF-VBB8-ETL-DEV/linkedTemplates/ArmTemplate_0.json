@@ -23,9 +23,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_VBSRC_SINK'"
 		},
-		"LS_AZADLS_VB_RAW_accountKey": {
+		"LS_AZADLS_VB_RAW001_accountKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_VB_RAW'"
+			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_VB_RAW001'"
 		},
 		"LS_AZADLS_VB_SINK_accountKey": {
 			"type": "secureString",
@@ -47,25 +47,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'LS_AZBLOB_CHID_SINK'"
 		},
-		"LS_AZBLOB_CHID_SRV_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'LS_AZBLOB_CHID_SRV'"
-		},
 		"LS_AZBLOB_CHILD_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'LS_AZBLOB_CHILD'"
 		},
-		"LS_AZBLOB_JSON_FLAT_SINK_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'LS_AZBLOB_JSON_FLAT_SINK'"
-		},
 		"LS_AZSQLDB_METADATA_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_AZSQLDB_METADATA'"
-		},
-		"LS_SFTP_SINK_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'LS_SFTP_SINK'"
 		},
 		"LS_AZADLS_JSONFLAT_METADATA_properties_typeProperties_url": {
 			"type": "string",
@@ -91,25 +79,21 @@
 			"type": "string",
 			"defaultValue": "https://adlsdevvbsrc01.dfs.core.windows.net/"
 		},
-		"LS_AZADLS_VB_RAW_properties_typeProperties_url": {
+		"LS_AZADLS_VB_CLOUD_CSV_SINK_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().storage_account_loc}"
+		},
+		"LS_AZADLS_VB_CLOUD_RAW_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().storage_account_loc}"
+		},
+		"LS_AZADLS_VB_RAW001_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevvisionboardraw01.dfs.core.windows.net/"
 		},
 		"LS_AZADLS_VB_SINK_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevvbsrc01.dfs.core.windows.net/"
-		},
-		"LS_AZBLOB_JSON_FLAT_SINK_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://adlsvbsinkdev.dfs.core.windows.net/"
-		},
-		"LS_AZBLOB_SINK_PRQT_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "@{linkedService().adls_storage_acc_loc}"
-		},
-		"LS_AZBLOB_SRV_CSV_properties_typeProperties_serviceEndpoint": {
-			"type": "string",
-			"defaultValue": "@{linkedService().storage_acc_loc}"
 		},
 		"LS_AZSQLDB_METADATA_properties_typeProperties_server": {
 			"type": "string",
@@ -126,14 +110,6 @@
 		"LS_RESTAPI_SRC_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://retool.com/utilities/generate-api-from-csv"
-		},
-		"LS_SFTP_SINK_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "adlssftpsinkdev.blob.core.windows.net"
-		},
-		"LS_SFTP_SINK_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "adlssftpsinkdev.sftpsink"
 		}
 	},
 	"variables": {
@@ -248,17 +224,53 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/LS_AZADLS_VB_RAW')]",
+			"name": "[concat(parameters('factoryName'), '/LS_AZADLS_VB_CLOUD_CSV_SINK')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"storage_account_loc": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_AZADLS_VB_CLOUD_CSV_SINK_properties_typeProperties_url')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_AZADLS_VB_CLOUD_RAW')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"storage_account_loc": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_AZADLS_VB_CLOUD_RAW_properties_typeProperties_url')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_AZADLS_VB_RAW001')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('LS_AZADLS_VB_RAW_properties_typeProperties_url')]",
+					"url": "[parameters('LS_AZADLS_VB_RAW001_properties_typeProperties_url')]",
 					"accountKey": {
 						"type": "SecureString",
-						"value": "[parameters('LS_AZADLS_VB_RAW_accountKey')]"
+						"value": "[parameters('LS_AZADLS_VB_RAW001_accountKey')]"
 					}
 				}
 			},
@@ -335,19 +347,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/LS_AZBLOB_CHID_SRV')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('LS_AZBLOB_CHID_SRV_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/LS_AZBLOB_CHILD')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -356,60 +355,6 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('LS_AZBLOB_CHILD_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_AZBLOB_JSON_FLAT_SINK')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('LS_AZBLOB_JSON_FLAT_SINK_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('LS_AZBLOB_JSON_FLAT_SINK_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_AZBLOB_SINK_PRQT')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"parameters": {
-					"adls_storage_acc_loc": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('LS_AZBLOB_SINK_PRQT_properties_typeProperties_url')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_AZBLOB_SRV_CSV')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"parameters": {
-					"storage_acc_loc": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"serviceEndpoint": "[parameters('LS_AZBLOB_SRV_CSV_properties_typeProperties_serviceEndpoint')]",
-					"accountKind": "BlobStorage"
 				}
 			},
 			"dependsOn": []
@@ -453,27 +398,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/LS_SFTP_SINK')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "Sftp",
-				"typeProperties": {
-					"host": "[parameters('LS_SFTP_SINK_properties_typeProperties_host')]",
-					"port": 22,
-					"skipHostKeyValidation": true,
-					"authenticationType": "Basic",
-					"userName": "[parameters('LS_SFTP_SINK_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('LS_SFTP_SINK_password')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/SHIR-ONPREM-SQL')]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
@@ -482,6 +406,107 @@
 				"typeProperties": {}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_AZADLS_BULKCOPY_JSON_SINK')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_AZADLS_VB_SINK",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						},
+						"folderPath": "json",
+						"fileSystem": "bulk"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_AZADLS_VB_SINK')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_AZADLS_BULKCOPY_JSON_SRC')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_AZADLS_VB_RAW001",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						},
+						"fileSystem": "input"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_AZADLS_VB_RAW001')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_AZADLS_BULK_COPY_RAW')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_AZADLS_VB_RAW001",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						},
+						"fileSystem": "input"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_AZADLS_VB_RAW001')]"
+			]
 		}
 	]
 }
