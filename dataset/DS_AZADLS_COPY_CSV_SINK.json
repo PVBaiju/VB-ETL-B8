@@ -1,5 +1,5 @@
 {
-	"name": "DS_AZBLOB_SINK_CSV",
+	"name": "DS_AZADLS_COPY_CSV_SINK",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LS_AZADLS_VB_SINK",
