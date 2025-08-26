@@ -144,7 +144,7 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "DS_AZBLOB_SRV_CHILD",
+									"referenceName": "DS_AZADLS_BULK_COPY_RAW",
 									"type": "DatasetReference",
 									"parameters": {
 										"filename": {
