@@ -131,14 +131,12 @@
 						}
 					},
 					"sink": {
-						"type": "DelimitedTextSink",
+						"type": "ParquetSink",
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings"
 						},
 						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
+							"type": "ParquetWriteSettings"
 						}
 					},
 					"enableStaging": false,
@@ -173,7 +171,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DS_AZADLS_CSVCOPY_CLOUD_SINK",
+						"referenceName": "DS_AZADLS_PRQT_CLOUD_CSV_SINK",
 						"type": "DatasetReference"
 					}
 				]
