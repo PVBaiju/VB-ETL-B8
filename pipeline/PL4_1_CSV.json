@@ -172,7 +172,17 @@
 				"outputs": [
 					{
 						"referenceName": "DS_AZADLS_PRQT_CLOUD_CSV_SINK",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"storage_account_loc": {
+								"value": "@activity('LKUP_JOB_DETAILS').output.firstRow.targetdata",
+								"type": "Expression"
+							},
+							"filename": {
+								"value": "@activity('LKUP_JOB_DETAILS').output.firstRow.targetdirectory",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
