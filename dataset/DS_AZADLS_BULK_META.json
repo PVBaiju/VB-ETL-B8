@@ -1,5 +1,5 @@
 {
-	"name": "DS_AZBLOB_BULK_CHILD",
+	"name": "DS_AZADLS_BULK_META",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LS_AZADLS_JSONFLAT_METADATA",
@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileSystem": "rawdata"
+				"fileSystem": "input"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
