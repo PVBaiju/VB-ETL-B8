@@ -108,11 +108,11 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"filename": {
-											"value": "@item().TABLE_SCHEMA",
+											"value": "@concat(item().TABLE_SCHEMA, '_', item().TABLE_NAME, '.csv_', formatDateTime(utcNow(), 'yyyy-MM-dd HH-mm-ss'), '.csv')\n",
 											"type": "Expression"
 										},
 										"folder": {
-											"value": "@item().TABLE",
+											"value": "@concat(\n    'sqltable/',\n    formatDateTime(utcNow(), 'yyyy'), '/',\n    formatDateTime(utcNow(), 'MM'), '/',\n    formatDateTime(utcNow(), 'dd')\n)",
 											"type": "Expression"
 										}
 									}
@@ -121,6 +121,63 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "COPY SQL TABLE",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_AZSQLSRV_MIGRATION_SRC",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_AZSQLSRV_MIGRATION_PRQUT",
+						"type": "DatasetReference",
+						"parameters": {
+							"folder": {
+								"value": "@concat(formatDateTime(utcNow(),'yyyy'),'/',formatDateTime(utcNow(),'MM'),'/',formatDateTime(utcNow(),'dd'),'/')",
+								"type": "Expression"
+							},
+							"filename": "sqldb"
+						}
+					}
+				]
 			}
 		],
 		"annotations": []
