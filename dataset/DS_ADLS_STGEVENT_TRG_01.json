@@ -2,10 +2,13 @@
 	"name": "DS_ADLS_STGEVENT_TRG_01",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_AZADLS_VB_RAW001",
+			"referenceName": "LS_AZADLS_VB_SINK",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
+			"folder": {
+				"type": "string"
+			},
 			"filename": {
 				"type": "string"
 			}
@@ -19,8 +22,11 @@
 					"value": "@dataset().filename",
 					"type": "Expression"
 				},
-				"folderPath": "ingress",
-				"fileSystem": "input"
+				"folderPath": {
+					"value": "@dataset().folder",
+					"type": "Expression"
+				},
+				"fileSystem": "output"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

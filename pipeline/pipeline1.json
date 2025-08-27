@@ -58,19 +58,20 @@
 				"inputs": [
 					{
 						"referenceName": "DS_ADLS_STGEVENT_TRG_01",
-						"type": "DatasetReference",
-						"parameters": {
-							"filename": {
-								"value": "@activity('Get Metadata1').output.itemName",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "DS_ADLS_STGEVENT_TRG_01",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"folder": "@concat(     'csv/',     formatDateTime(utcNow(), 'yyyy'), '/',     formatDateTime(utcNow(), 'MM'), '/',     formatDateTime(utcNow(), 'dd') )",
+							"filename": {
+								"value": "@activity('Get Metadata1').output.childItems",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
@@ -96,6 +97,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
