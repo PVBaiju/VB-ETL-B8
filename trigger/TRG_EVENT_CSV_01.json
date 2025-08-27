@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "When CSV file lands in ingress folder it will moved to ",
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipelines": [
 			{
 				"pipelineReference": {
