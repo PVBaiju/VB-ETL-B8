@@ -1,0 +1,20 @@
+{
+	"name": "TRG_EVENT_CSV_01",
+	"properties": {
+		"description": "When CSV file lands in ingress folder it will moved to ",
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/input/blobs/ingress",
+			"blobPathEndsWith": ".csv",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/84c07c0f-6610-4eb2-8c7e-f1890653e188/resourceGroups/VB_DEV_B8_ETL/providers/Microsoft.Storage/storageAccounts/adlsdevvisionboardraw01",
+			"events": [
+				"Microsoft.Storage.BlobCreated",
+				"Microsoft.Storage.BlobDeleted"
+			]
+		}
+	}
+}
