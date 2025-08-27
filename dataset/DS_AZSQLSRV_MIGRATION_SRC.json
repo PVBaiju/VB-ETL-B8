@@ -45,10 +45,6 @@
 				"type": "datetime2",
 				"scale": 7
 			}
-		],
-		"typeProperties": {
-			"schema": "dbo",
-			"table": "order_payments_dataset"
-		}
+		]
 	}
 }

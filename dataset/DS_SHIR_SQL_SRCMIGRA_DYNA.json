@@ -1,0 +1,30 @@
+{
+	"name": "DS_SHIR_SQL_SRCMIGRA_DYNA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LSSqlServermig",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"schema": {
+				"type": "string"
+			},
+			"tablename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().schema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().tablename",
+				"type": "Expression"
+			}
+		}
+	}
+}
