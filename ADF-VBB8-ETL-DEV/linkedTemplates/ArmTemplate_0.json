@@ -461,8 +461,7 @@
 						"folderPath": {
 							"value": "@dataset().folder",
 							"type": "Expression"
-						},
-						"fileSystem": "output"
+						}
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",

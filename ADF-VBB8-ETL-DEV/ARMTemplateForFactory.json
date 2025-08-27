@@ -447,8 +447,7 @@
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings",
-									"copyBehavior": "PreserveHierarchy"
+									"type": "AzureBlobFSWriteSettings"
 								},
 								"formatSettings": {
 									"type": "DelimitedTextWriteSettings",
@@ -2723,8 +2722,7 @@
 						"folderPath": {
 							"value": "@dataset().folder",
 							"type": "Expression"
-						},
-						"fileSystem": "output"
+						}
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
