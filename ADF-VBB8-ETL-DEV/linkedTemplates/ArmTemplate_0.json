@@ -39,6 +39,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_CSV_ENT_TRGGR_01'"
 		},
+		"LS_CSV_ENT_TRGGR_02_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_CSV_ENT_TRGGR_02'"
+		},
 		"LS_AZADLS_JSONFLAT_METADATA_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevvisionboardraw01.dfs.core.windows.net/"
@@ -98,6 +102,10 @@
 		"LS_CSV_ENT_TRGGR_01_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevvisionboardraw01.dfs.core.windows.net/"
+		},
+		"LS_CSV_ENT_TRGGR_02_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevvbsrc01.dfs.core.windows.net/"
 		},
 		"LS_RESTAPI_SRC_properties_typeProperties_url": {
 			"type": "string",
@@ -304,6 +312,7 @@
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "RAW LINKSET",
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
@@ -311,6 +320,24 @@
 					"accountKey": {
 						"type": "SecureString",
 						"value": "[parameters('LS_CSV_ENT_TRGGR_01_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_CSV_ENT_TRGGR_02')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "SINK LINKSET",
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_CSV_ENT_TRGGR_02_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_CSV_ENT_TRGGR_02_accountKey')]"
 					}
 				}
 			},
@@ -347,7 +374,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "LS_CSV_ENT_TRGGR_01",
+					"referenceName": "LS_CSV_ENT_TRGGR_02",
 					"type": "LinkedServiceReference"
 				},
 				"parameters": {
@@ -371,7 +398,7 @@
 							"value": "@dataset().folder",
 							"type": "Expression"
 						},
-						"fileSystem": "input"
+						"fileSystem": "output"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -402,7 +429,7 @@
 				]
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_CSV_ENT_TRGGR_01')]"
+				"[concat(variables('factoryId'), '/linkedServices/LS_CSV_ENT_TRGGR_02')]"
 			]
 		},
 		{
@@ -570,32 +597,6 @@
 							"type": "Expression"
 						},
 						"fileSystem": "output"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_AZADLS_VB_SINK')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_AZADLS_CSVCOPY_CLOUD_SINK')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_AZADLS_VB_SINK",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",

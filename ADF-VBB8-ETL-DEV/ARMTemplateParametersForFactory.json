@@ -32,6 +32,9 @@
 		"LS_CSV_ENT_TRGGR_01_accountKey": {
 			"value": ""
 		},
+		"LS_CSV_ENT_TRGGR_02_accountKey": {
+			"value": ""
+		},
 		"LSSqlServermig_properties_typeProperties_server": {
 			"value": "DESKTOP-ZATNEVE"
 		},
@@ -85,6 +88,9 @@
 		},
 		"LS_CSV_ENT_TRGGR_01_properties_typeProperties_url": {
 			"value": "https://adlsdevvisionboardraw01.dfs.core.windows.net/"
+		},
+		"LS_CSV_ENT_TRGGR_02_properties_typeProperties_url": {
+			"value": "https://adlsdevvbsrc01.dfs.core.windows.net/"
 		},
 		"LS_RESTAPI_SRC_properties_typeProperties_url": {
 			"value": "https://retool.com/utilities/generate-api-from-csv"

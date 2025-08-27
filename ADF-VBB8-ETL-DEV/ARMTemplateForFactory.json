@@ -43,6 +43,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_CSV_ENT_TRGGR_01'"
 		},
+		"LS_CSV_ENT_TRGGR_02_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_CSV_ENT_TRGGR_02'"
+		},
 		"LSSqlServermig_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "DESKTOP-ZATNEVE"
@@ -114,6 +118,10 @@
 		"LS_CSV_ENT_TRGGR_01_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevvisionboardraw01.dfs.core.windows.net/"
+		},
+		"LS_CSV_ENT_TRGGR_02_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevvbsrc01.dfs.core.windows.net/"
 		},
 		"LS_RESTAPI_SRC_properties_typeProperties_url": {
 			"type": "string",
@@ -480,11 +488,11 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"folder": {
-										"value": "@pipeline().parameters.folder",
+										"value": "@concat('event_trigger_csv/', formatDateTime(utcNow(), 'yyyy'), '/', formatDateTime(utcNow(), 'MM'), '/', formatDateTime(utcNow(), 'dd'))\n",
 										"type": "Expression"
 									},
 									"filename": {
-										"value": "@pipeline().parameters.filename",
+										"value": "@concat(replace(pipeline().parameters.filename, '.csv', ''), '_', formatDateTime(utcNow(), 'yyyy-MM-dd HH:mm:ss'), '.csv')\n",
 										"type": "Expression"
 									}
 								}
@@ -2627,7 +2635,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "LS_CSV_ENT_TRGGR_01",
+					"referenceName": "LS_CSV_ENT_TRGGR_02",
 					"type": "LinkedServiceReference"
 				},
 				"parameters": {
@@ -2651,7 +2659,7 @@
 							"value": "@dataset().folder",
 							"type": "Expression"
 						},
-						"fileSystem": "input"
+						"fileSystem": "output"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -2682,7 +2690,7 @@
 				]
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_CSV_ENT_TRGGR_01')]"
+				"[concat(variables('factoryId'), '/linkedServices/LS_CSV_ENT_TRGGR_02')]"
 			]
 		},
 		{
@@ -3752,6 +3760,7 @@
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "RAW LINKSET",
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
@@ -3759,6 +3768,24 @@
 					"accountKey": {
 						"type": "SecureString",
 						"value": "[parameters('LS_CSV_ENT_TRGGR_01_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_CSV_ENT_TRGGR_02')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "SINK LINKSET",
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_CSV_ENT_TRGGR_02_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_CSV_ENT_TRGGR_02_accountKey')]"
 					}
 				}
 			},
