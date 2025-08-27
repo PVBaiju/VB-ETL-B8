@@ -70,11 +70,11 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"folder": {
-								"value": "@pipeline().parameters.folder",
+								"value": "@concat('event_trigger_csv/', formatDateTime(utcNow(), 'yyyy'), '/', formatDateTime(utcNow(), 'MM'), '/', formatDateTime(utcNow(), 'dd'))\n",
 								"type": "Expression"
 							},
 							"filename": {
-								"value": "@pipeline().parameters.filename",
+								"value": "@concat(replace(pipeline().parameters.filename, '.csv', ''), '_', formatDateTime(utcNow(), 'yyyy-MM-dd HH:mm:ss'), '.csv')\n",
 								"type": "Expression"
 							}
 						}

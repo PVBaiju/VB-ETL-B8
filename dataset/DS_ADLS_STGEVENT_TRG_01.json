@@ -2,7 +2,7 @@
 	"name": "DS_ADLS_STGEVENT_TRG_01",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_CSV_ENT_TRGGR_01",
+			"referenceName": "LS_CSV_ENT_TRGGR_02",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
@@ -26,7 +26,7 @@
 					"value": "@dataset().folder",
 					"type": "Expression"
 				},
-				"fileSystem": "input"
+				"fileSystem": "output"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
