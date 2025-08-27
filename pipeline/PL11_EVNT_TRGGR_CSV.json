@@ -73,7 +73,7 @@
 								"type": "Expression"
 							},
 							"folder": {
-								"value": "@concat('event_trigger_csv/', formatDateTime(utcNow(), 'yyyy'), '/', formatDateTime(utcNow(), 'MM'), '/', formatDateTime(utcNow(), 'dd'))",
+								"value": "@concat('eventcsv/', formatDateTime(utcNow(), 'yyyy'), '/', formatDateTime(utcNow(), 'MM'), '/', formatDateTime(utcNow(), 'dd'))",
 								"type": "Expression"
 							}
 						}
