@@ -1,6 +1,10 @@
 {
 	"name": "DS_ADLS_STGEVENT_TRG_01",
 	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_CSV_ENT_TRGGR_01",
+			"type": "LinkedServiceReference"
+		},
 		"parameters": {
 			"folder": {
 				"type": "string"
@@ -12,6 +16,11 @@
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "Ingress",
+				"fileSystem": "Input"
+			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
