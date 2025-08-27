@@ -489,7 +489,7 @@
 								"type": "DatasetReference",
 								"parameters": {
 									"filename": {
-										"value": "@concat(\n    replace(\n        coalesce(pipeline().parameters.filename, 'defaultfilename.csv'),\n        '.csv',\n        ''\n    ),\n    '_',\n    formatDateTime(utcNow(), 'yyyy-MM-dd-HH-mm-ss'),\n    '.csv'\n)\n",
+										"value": "@pipeline().parameters.filename",
 										"type": "Expression"
 									},
 									"folder": {
@@ -2724,7 +2724,8 @@
 						"folderPath": {
 							"value": "@dataset().folder",
 							"type": "Expression"
-						}
+						},
+						"fileSystem": "output"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
