@@ -34,7 +34,7 @@
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
 							"quoteAllText": true,
-							"fileExtension": ".csv"
+							"fileExtension": ".txt"
 						}
 					},
 					"enableStaging": false,
@@ -65,15 +65,15 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DS_ADLS_STGEVENT_TRG_01",
+						"referenceName": "DS_ADLS_STGEVENT_TRG_02",
 						"type": "DatasetReference",
 						"parameters": {
-							"folder": {
-								"value": "@concat('event_trigger_csv/', formatDateTime(utcNow(), 'yyyy'), '/', formatDateTime(utcNow(), 'MM'), '/', formatDateTime(utcNow(), 'dd'))\n",
+							"filename": {
+								"value": "@concat(replace(pipeline().parameters.filename, '.csv', ''), '_', formatDateTime(utcNow(), 'yyyy-MM-dd HH:mm:ss'), '.csv')",
 								"type": "Expression"
 							},
-							"filename": {
-								"value": "@concat(replace(pipeline().parameters.filename, '.csv', ''), '_', formatDateTime(utcNow(), 'yyyy-MM-dd HH:mm:ss'), '.csv')\n",
+							"folder": {
+								"value": "@concat('event_trigger_csv/', formatDateTime(utcNow(), 'yyyy'), '/', formatDateTime(utcNow(), 'MM'), '/', formatDateTime(utcNow(), 'dd'))",
 								"type": "Expression"
 							}
 						}
