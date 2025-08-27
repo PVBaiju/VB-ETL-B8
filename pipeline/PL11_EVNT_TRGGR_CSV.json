@@ -20,6 +20,7 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
+							"wildcardFileName": "*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -52,8 +53,14 @@
 						"referenceName": "DS_ADLS_STGEVENT_TRG_01",
 						"type": "DatasetReference",
 						"parameters": {
-							"folder": "input",
-							"filename": "ingress"
+							"folder": {
+								"value": "@pipeline().parameters.folder",
+								"type": "Expression"
+							},
+							"filename": {
+								"value": "@pipeline().parameters.filename",
+								"type": "Expression"
+							}
 						}
 					}
 				],
@@ -62,13 +69,27 @@
 						"referenceName": "DS_ADLS_STGEVENT_TRG_01",
 						"type": "DatasetReference",
 						"parameters": {
-							"folder": "output",
-							"filename": "eventtrgcsv"
+							"folder": {
+								"value": "@pipeline().parameters.folder",
+								"type": "Expression"
+							},
+							"filename": {
+								"value": "@pipeline().parameters.filename",
+								"type": "Expression"
+							}
 						}
 					}
 				]
 			}
 		],
+		"parameters": {
+			"folder": {
+				"type": "string"
+			},
+			"filename": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
