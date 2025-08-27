@@ -1,0 +1,23 @@
+{
+	"name": "DS_EVNTTRG_META",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZADLS_VB_RAW001",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "ingress",
+				"fileSystem": "input"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
