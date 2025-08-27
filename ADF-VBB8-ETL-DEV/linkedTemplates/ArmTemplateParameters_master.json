@@ -26,22 +26,10 @@
 		"LS_AZADLS_VB_SINK_accountKey": {
 			"value": ""
 		},
-		"LS_AZBLOB_BULK_SRV_connectionString": {
-			"value": ""
-		},
-		"LS_AZBLOB_CHID_JSONSINK_connectionString": {
-			"value": ""
-		},
-		"LS_AZBLOB_CHID_JSONSRV_connectionString": {
-			"value": ""
-		},
-		"LS_AZBLOB_CHID_SINK_connectionString": {
-			"value": ""
-		},
-		"LS_AZBLOB_CHILD_connectionString": {
-			"value": ""
-		},
 		"LS_AZSQLDB_METADATA_password": {
+			"value": ""
+		},
+		"LS_CSV_ENT_TRGGR_01_accountKey": {
 			"value": ""
 		},
 		"LSSqlServermig_properties_typeProperties_server": {
@@ -95,8 +83,14 @@
 		"LS_AZSQLDB_METADATA_properties_typeProperties_userName": {
 			"value": "access-data-dev"
 		},
+		"LS_CSV_ENT_TRGGR_01_properties_typeProperties_url": {
+			"value": "https://adlsdevvisionboardraw01.dfs.core.windows.net/"
+		},
 		"LS_RESTAPI_SRC_properties_typeProperties_url": {
 			"value": "https://retool.com/utilities/generate-api-from-csv"
+		},
+		"TRG_EVENT_CSV_01_properties_typeProperties_scope": {
+			"value": "/subscriptions/84c07c0f-6610-4eb2-8c7e-f1890653e188/resourceGroups/VB_DEV_B8_ETL/providers/Microsoft.Storage/storageAccounts/adlsdevvisionboardraw01"
 		},
 		"containerUri": {
 			"value": ""

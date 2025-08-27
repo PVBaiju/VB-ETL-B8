@@ -35,29 +35,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_AZADLS_VB_SINK'"
 		},
-		"LS_AZBLOB_BULK_SRV_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'LS_AZBLOB_BULK_SRV'"
-		},
-		"LS_AZBLOB_CHID_JSONSINK_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'LS_AZBLOB_CHID_JSONSINK'"
-		},
-		"LS_AZBLOB_CHID_JSONSRV_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'LS_AZBLOB_CHID_JSONSRV'"
-		},
-		"LS_AZBLOB_CHID_SINK_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'LS_AZBLOB_CHID_SINK'"
-		},
-		"LS_AZBLOB_CHILD_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'LS_AZBLOB_CHILD'"
-		},
 		"LS_AZSQLDB_METADATA_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_AZSQLDB_METADATA'"
+		},
+		"LS_CSV_ENT_TRGGR_01_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_CSV_ENT_TRGGR_01'"
 		},
 		"LSSqlServermig_properties_typeProperties_server": {
 			"type": "string",
@@ -127,9 +111,17 @@
 			"type": "string",
 			"defaultValue": "access-data-dev"
 		},
+		"LS_CSV_ENT_TRGGR_01_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevvisionboardraw01.dfs.core.windows.net/"
+		},
 		"LS_RESTAPI_SRC_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://retool.com/utilities/generate-api-from-csv"
+		},
+		"TRG_EVENT_CSV_01_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/84c07c0f-6610-4eb2-8c7e-f1890653e188/resourceGroups/VB_DEV_B8_ETL/providers/Microsoft.Storage/storageAccounts/adlsdevvisionboardraw01"
 		},
 		"containerUri": {
 			"type": "string",
@@ -176,23 +168,11 @@
 					"LS_AZADLS_VB_SINK_accountKey": {
 						"value": "[parameters('LS_AZADLS_VB_SINK_accountKey')]"
 					},
-					"LS_AZBLOB_BULK_SRV_connectionString": {
-						"value": "[parameters('LS_AZBLOB_BULK_SRV_connectionString')]"
-					},
-					"LS_AZBLOB_CHID_JSONSINK_connectionString": {
-						"value": "[parameters('LS_AZBLOB_CHID_JSONSINK_connectionString')]"
-					},
-					"LS_AZBLOB_CHID_JSONSRV_connectionString": {
-						"value": "[parameters('LS_AZBLOB_CHID_JSONSRV_connectionString')]"
-					},
-					"LS_AZBLOB_CHID_SINK_connectionString": {
-						"value": "[parameters('LS_AZBLOB_CHID_SINK_connectionString')]"
-					},
-					"LS_AZBLOB_CHILD_connectionString": {
-						"value": "[parameters('LS_AZBLOB_CHILD_connectionString')]"
-					},
 					"LS_AZSQLDB_METADATA_password": {
 						"value": "[parameters('LS_AZSQLDB_METADATA_password')]"
+					},
+					"LS_CSV_ENT_TRGGR_01_accountKey": {
+						"value": "[parameters('LS_CSV_ENT_TRGGR_01_accountKey')]"
 					},
 					"LS_AZADLS_JSONFLAT_METADATA_properties_typeProperties_url": {
 						"value": "[parameters('LS_AZADLS_JSONFLAT_METADATA_properties_typeProperties_url')]"
@@ -235,6 +215,9 @@
 					},
 					"LS_AZSQLDB_METADATA_properties_typeProperties_userName": {
 						"value": "[parameters('LS_AZSQLDB_METADATA_properties_typeProperties_userName')]"
+					},
+					"LS_CSV_ENT_TRGGR_01_properties_typeProperties_url": {
+						"value": "[parameters('LS_CSV_ENT_TRGGR_01_properties_typeProperties_url')]"
 					},
 					"LS_RESTAPI_SRC_properties_typeProperties_url": {
 						"value": "[parameters('LS_RESTAPI_SRC_properties_typeProperties_url')]"
@@ -288,6 +271,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"TRG_EVENT_CSV_01_properties_typeProperties_scope": {
+						"value": "[parameters('TRG_EVENT_CSV_01_properties_typeProperties_scope')]"
 					}
 				}
 			},
