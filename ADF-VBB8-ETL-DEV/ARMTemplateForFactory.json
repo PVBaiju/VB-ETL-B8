@@ -2659,7 +2659,7 @@
 							"value": "@dataset().folder",
 							"type": "Expression"
 						},
-						"fileSystem": "output"
+						"fileSystem": "input"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
