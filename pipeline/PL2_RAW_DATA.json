@@ -79,12 +79,19 @@
 							"value": "api",
 							"activities": [
 								{
-									"name": "Wait7",
-									"type": "Wait",
+									"name": "EXEC RESTAPI PL",
+									"type": "ExecutePipeline",
 									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
 									"userProperties": [],
 									"typeProperties": {
-										"waitTimeInSeconds": 1
+										"pipeline": {
+											"referenceName": "PL5_RESTAPI",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true
 									}
 								}
 							]
