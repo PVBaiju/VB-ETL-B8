@@ -1,0 +1,12 @@
+{
+	"name": "LS_ADLS_RESTAPI_RAW01",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://retoolapi.dev/EJFl2Y/vbrestapi",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
