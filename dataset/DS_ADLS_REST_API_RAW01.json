@@ -1,0 +1,12 @@
+{
+	"name": "DS_ADLS_REST_API_RAW01",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADLS_RESTAPI_RAW01",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}

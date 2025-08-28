@@ -1,0 +1,28 @@
+{
+	"name": "DS_ADLS_PARQUT_RESTAPI_SINK01",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZADLS_VB_SINK",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"folder": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@dataset().folder",
+					"type": "Expression"
+				},
+				"fileSystem": "output"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
