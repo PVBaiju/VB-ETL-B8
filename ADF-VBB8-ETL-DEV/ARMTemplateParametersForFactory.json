@@ -44,6 +44,9 @@
 		"LSSqlServermig_properties_typeProperties_userName": {
 			"value": "vbtest"
 		},
+		"LS_ADLS_RESTAPI_RAW01_properties_typeProperties_url": {
+			"value": "https://retoolapi.dev/EJFl2Y/vbrestapi"
+		},
 		"LS_AZADLS_JSONFLAT_METADATA_properties_typeProperties_url": {
 			"value": "https://adlsdevvisionboardraw01.dfs.core.windows.net/"
 		},
