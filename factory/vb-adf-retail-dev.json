@@ -1,0 +1,9 @@
+{
+	"name": "vb-adf-retail-dev",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "9243ef6b-e419-4868-8d03-352054a06caf",
+		"tenantId": "3c9a95b3-9291-4ed2-9677-13948a6e69d0"
+	}
+}
