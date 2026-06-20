@@ -1,0 +1,15 @@
+{
+	"name": "adfdevdunhummby01",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "89f84d8a-ea3f-40c0-aa31-c4b57a1e3bc1",
+		"tenantId": "3c9a95b3-9291-4ed2-9677-13948a6e69d0"
+	}
+}
