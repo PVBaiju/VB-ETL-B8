@@ -1,0 +1,15 @@
+{
+	"name": "VB-ADF-BXI-E2E-SI",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "d1b812c8-5acb-47eb-97e7-1cb3cdb59442",
+		"tenantId": "3c9a95b3-9291-4ed2-9677-13948a6e69d0"
+	}
+}
