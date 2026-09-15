@@ -5,13 +5,13 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"server": "LAPTOP-MHJP2LVG\\SQLEXPRESS",
-			"database": "test",
-			"encrypt": "mandatory",
+			"server": "sqldata",
+			"database": "data",
+			"encrypt": "optional",
 			"trustServerCertificate": false,
 			"authenticationType": "SQL",
-			"userName": "visionboard",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDQzQTc2MUE4LTY1RTAtNEY3RS1CQzk1LTk4RkFCQTU1QUM2NF9iMjYxNjQzYi04OTUzLTQ0MzgtYjZiNS01N2RjZDZkNjMyOWQiDQp9"
+			"userName": "sa",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEJEQjdCNEIzLTg3REMtNDIxRS1BN0Y2LUQ5MzQzMzNEMzU3Ql9iZWMwYWNiMy0zZDQ2LTQ2YmItYWFhMy1lNDk3NGI3ZDEwOGUiDQp9"
 		}
 	}
 }
